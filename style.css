@@ -1,10 +1,10 @@
 @font-face {
   font-family: anjoman;
-  src: url("/font/Anjoman-Regular.woff2");
+  src: url("font/Anjoman-Regular.woff2");
 }
 @font-face {
   font-family: "anjoman num";
-  src: url("/font/Anjoman-FaNum-Regular.woff2");
+  src: url("font/Anjoman-FaNum-Regular.woff2");
 }
 
 * {
