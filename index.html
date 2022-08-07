@@ -14,14 +14,14 @@
         <h2>مدیریت مالی سفر من</h2>
         <div>
           <form action="" id="createTravel">
-            <label for=""></label>
+            <label for="">مقصد</label>
             <input type="text" />
-            <label for=""></label>
+            <label for=""> تعداد مسافران</label>
             <input type="text" />
-            <label for=""></label>
-            <input type="text" />
-            <label for=""></label>
-            <input type="text" />
+            <label for="">زمان شروع سفر</label>
+            <input type="date" />
+            <label for="">زمان پایان سفر </label>
+            <input type="date" />
             <button>ایجاد سفر</button>
           </form>
 
@@ -38,20 +38,22 @@
             </div>
           </div>
         </div>
-        <div>
-          <div>
+        <div id="budget">
+          <div id="budgetManagement">
             <h2>مدیریت بودجه</h2>
+           <div>
             <label for="household">انتخاب خانوار</label>
             <select name="household" id="household" class="household">
               <option value="">انتخاب کنید</option>
             </select>
+           </div>
             <div>
               <button>افزایش موجودی</button>
               <button>وضعیت</button>
               <button>ایجاد خانوار جدید</button>
             </div>
           </div>
-          <div>
+          <div id="expenseCat">
             <button id="foodBtn" class="categoryBtn">غذا</button>
             <button id="entBtn" class="categoryBtn">تفریح</button>
             <button id="transportBtn" class="categoryBtn">حمل و نقل</button>
