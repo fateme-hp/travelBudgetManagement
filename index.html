@@ -9,8 +9,9 @@
   </head>
   <body>
     <div class="container">
+      <!-- step 1: create travel  -->
       <div id="createTravel">
-        <h2></h2>
+        <h2>مدیریت مالی سفر من</h2>
         <div>
           <form action="" id="createTravel">
             <label for=""></label>
@@ -24,43 +25,177 @@
             <button>ایجاد سفر</button>
           </form>
 
-          <img src="" alt="" />
+          <img src="img/budget.png" alt="" />
         </div>
       </div>
+      <!-- step 2: travel budget management -->
       <div id="travelManagement">
         <div>
           <div id="travelInfo">
-            <h2>اطلاعات سفر </h2>
-            <div></div>
+            <h2>اطلاعات سفر</h2>
+            <div id="travelData">
+              <!-- add by js - get createTravel values -->
+            </div>
           </div>
         </div>
         <div>
           <div>
-            <h2></h2>
-            <input type="text" />
-            <button>افزایش موجودی</button>
-            <button> وضعیت</button>
-            <button>ایجاد خانوار جدید </button>
+            <h2>مدیریت بودجه</h2>
+            <label for="household">انتخاب خانوار</label>
+            <select name="household" id="household" class="household">
+              <option value="">انتخاب کنید</option>
+            </select>
+            <div>
+              <button>افزایش موجودی</button>
+              <button>وضعیت</button>
+              <button>ایجاد خانوار جدید</button>
+            </div>
           </div>
           <div>
-            <button>غذا</button>
-            <button>تفریح</button>
-            <button>حمل و نقل</button>
-            <button>اقامت</button>
-            <button>سایر </button>
-            <button>حذف سفر</button>
+            <button id="foodBtn" class="categoryBtn">غذا</button>
+            <button id="entBtn" class="categoryBtn">تفریح</button>
+            <button id="transportBtn" class="categoryBtn">حمل و نقل</button>
+            <button id="roomBtn" class="categoryBtn">اقامت</button>
+            <button id="otherBtn" class="categoryBtn">سایر</button>
+            <button id="delBtn">حذف سفر</button>
           </div>
         </div>
       </div>
-      <div id="foodCategory"></div>
-      <div id="entCategory"></div>
-      <div id="transportCategory"></div>
-      <div id="roomCategory"></div>
-      <div id="othersCategory"></div>
+      <!-- step 3: categories -->
+      <!-- food -->
+      <div id="foodCategory" class="category">
+          <h3>غذا</h3>
+          <div>
+            <form action="" id="food">
+              <label for="getfoodHousehold">انتخاب نام خانوار</label>
+              <select name="getfoodHousehold" id="getfoodHousehold" class="household"></select>
+              <label for="">عنوان</label>
+              <input type="text">
+              <label for="">هزینه</label>
+              <input type="text">
+              <button> ثبت هزینه</button>
+            </form>
+
+            <div id="foodExpense" class="expense">
+              <h4></h4>
+                <div class="costs">
+                  <ol>
+                    <li></li>
+                  </ol>
+                  <span class="costSum" id="foodSum"></span>
+                </div>
+              
+            </div>
+          </div>
+
+      </div>
+      <!-- entertainment -->
+      <div id="entCategory"  class="category">
+          <h3> تفریح</h3>
+          <div>
+            <form action="" id="entertainment">
+              <label for="getEntHousehold">انتخاب نام خانوار</label>
+              <select name="getEntHousehold" id="getEntHousehold" class="household"></select>
+              <label for="">عنوان</label>
+              <input type="text">
+              <label for="">هزینه</label>
+              <input type="text">
+              <button> ثبت هزینه</button>
+            </form>
+
+            <div id="entExpense" class="expense">
+              <h4></h4>
+                <div class="costs">
+                  <ol>
+                    <li></li>
+                  </ol>
+                  <span class="costSum" id="entSum"></span>
+                </div>
+              
+            </div>
+          </div>
+      </div>
+      <!-- transport -->
+      <div id="transportCategory"  class="category">
+       
+          <h3>حمل و نقل </h3>
+          <div>
+            <form action="" id="transport">
+              <label for="getTransportHousehold">انتخاب نام خانوار</label>
+              <select name="getTransportHousehold" id="getTransportHousehold" class="household"></select>
+              <label for="">عنوان</label>
+              <input type="text">
+              <label for="">هزینه</label>
+              <input type="text">
+              <button> ثبت هزینه</button>
+            </form>
+
+            <div id="trasportExpense" class="expense">
+              <h4></h4>
+                <div class="costs">
+                  <ol>
+                    <li></li>
+                  </ol>
+                  <span class="costSum" id="transportSum"></span>
+                </div>
+              
+            </div>
+          </div>
+      </div>
+      <!-- room -->
+      <div id="roomCategory"  class="category">
+          <h3>اقامت</h3>
+          <div>
+            <form action="" id="room">
+              <label for="getRoomHousehold">انتخاب نام خانوار</label>
+              <select name="getRoomHousehold" id="getRoomHousehold" class="household"></select>
+              <label for="">عنوان</label>
+              <input type="text">
+              <label for="">هزینه</label>
+              <input type="text">
+              <button> ثبت هزینه</button>
+            </form>
+
+            <div id="roomExpense" class="expense">
+              <h4></h4>
+                <div class="costs">
+                  <ol>
+                    <li></li>
+                  </ol>
+                  <span class="costSum" id="roomSum"></span>
+                </div>
+              
+            </div>
+          </div>
+      </div>
+      <div id="othersCategory"  class="category">
+          <h3>غذا</h3>
+          <div>
+            <form action="" id="other">
+              <label for="getotherHousehold">انتخاب نام خانوار</label>
+              <select name="getotherHousehold" id="getotherHousehold" class="household"></select>
+              <label for="">عنوان</label>
+              <input type="text">
+              <label for="">هزینه</label>
+              <input type="text">
+              <button> ثبت هزینه</button>
+            </form>
+
+            <div id="otherExpense" class="expense">
+              <h4></h4>
+                <div class="costs">
+                  <ol>
+                    <li></li>
+                  </ol>
+                  <span class="costSum" id="otherSum"></span>
+                </div>
+              
+            </div>
+          </div>
+      </div>
     </div>
 
-    +div3 h3 +div3-1 +div3-1-1 form> (input*3)+btn +div3-1-2 h4 +div > ol>li +
-    span
+   
 
     <script src="app.js"></script>
   </body>
