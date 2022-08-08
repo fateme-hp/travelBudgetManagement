@@ -95,6 +95,7 @@ button {
   background-color: #fff;
   border-radius: 5px;
   padding: 25px;
+  display: none;
 }
 #budget {
   margin: 30px auto;

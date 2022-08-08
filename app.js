@@ -9,6 +9,8 @@ let destination = document.querySelector('#destination'),
     desc = document.querySelector('#desc'),
     memberName = document.querySelector('#memberName'),
     memberWallet = document.querySelector('#memberWallet'),
+    travelData= document.querySelector('#travelData'),
+    travelManagement = document.querySelector('#travelManagement'),
     createMemberBtn = document.querySelector('#BtnCreateHousehold');
     
 
@@ -76,8 +78,16 @@ class Travel{
         if(!desc.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
            new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
         } else{
-          let  newTravelInfo = document.querySelectorAll('#createTravelForm input').values();
-          console.log(newTravelInfo);
+            travelManagement.style.display="flex"
+          let  newTravelInfo = document.querySelectorAll('#createTravelForm input');
+
+          for (let i = 0; i < newTravelInfo.length; i++) {
+            const infoSpan = document.querySelectorAll('.infoSpan');
+                infoSpan[i].append(newTravelInfo[i].value)
+          }
+          let newTravelDesc= document.querySelector('#createTravelForm textarea');
+          document.querySelector('#travelInfo p').append(newTravelDesc.value)
+          
         }
     }
     // method creat member
