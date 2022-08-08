@@ -6,7 +6,10 @@ let destination = document.querySelector('#destination'),
     endDate = document.querySelector('#endDate'),
     createTravelBtn = document.querySelector('#createTravelBtn'),
     createTravelForm = document.querySelector('#createTravelForm'),
-    description = document.querySelector('#description');
+    description = document.querySelector('#description'),
+    memberName = document.querySelector('#memberName'),
+    memberWallet = document.querySelector('#memberWallet'),
+    createMemberBtn = document.querySelector('#BtnCreateHousehold');
 
     
     // eventListeners
@@ -20,6 +23,26 @@ let destination = document.querySelector('#destination'),
         const newTravel = new Travel().createTravel()
 
     })
+
+    // creat Member Household
+    createMemberBtn.addEventListener('click' , function(e){
+        e.preventDefault();
+
+        // read value from form
+        let fullName = memberName.value,
+        wallet = memberWallet.value;
+
+        // check the value of fields are correct
+        if(fullName ==="" || wallet ===""){
+            UserInterface.displayMsg('لطفا مقادیر را به درستی وارد کنید.');
+
+        }else {
+            const member = new Travel(fullName,wallet);
+            
+        }
+
+    })
+
     class UserInterface{
         constructor(){}
     
@@ -40,14 +63,23 @@ let destination = document.querySelector('#destination'),
     }
 class Travel{
     
-    constructor(){}
+    constructor(fullName,wallet){
+        this.fullName = fullName;
+        this.wallet = wallet;
+    }
 
     // methods
+    // method create travel
     createTravel(){
        
         if(!description.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
            new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
         
         }
+    }
+    // method creat member
+    addMemberOfHousehold(){
+
+
     }
 }
