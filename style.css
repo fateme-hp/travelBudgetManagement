@@ -1,5 +1,5 @@
 @font-face {
-  font-family: anjoman;
+  font-family: "anjoman";
   src: url("font/Anjoman-Regular.woff2");
 }
 @font-face {
@@ -14,7 +14,7 @@
   list-style: none;
   text-decoration: none;
   color: inherit;
-  font-family: "anjoman num", anjoman;
+  font-family: "anjoman num", "anjoman";
 }
 body {
   background-color: #6675bb1a;
