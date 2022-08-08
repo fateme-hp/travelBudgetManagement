@@ -6,10 +6,11 @@ let destination = document.querySelector('#destination'),
     endDate = document.querySelector('#endDate'),
     createTravelBtn = document.querySelector('#createTravelBtn'),
     createTravelForm = document.querySelector('#createTravelForm'),
-    description = document.querySelector('#description'),
+    desc = document.querySelector('#desc'),
     memberName = document.querySelector('#memberName'),
     memberWallet = document.querySelector('#memberWallet'),
     createMemberBtn = document.querySelector('#BtnCreateHousehold');
+    
 
     
     // eventListeners
@@ -18,8 +19,8 @@ let destination = document.querySelector('#destination'),
     
     })
     // createTravel 
-    createTravelBtn.addEventListener('click', function(){
-    
+    createTravelBtn.addEventListener('click', function(e){
+        e.preventDefault()
         const newTravel = new Travel().createTravel()
 
     })
@@ -72,9 +73,11 @@ class Travel{
     // method create travel
     createTravel(){
        
-        if(!description.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
+        if(!desc.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
            new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
-        
+        } else{
+          let  newTravelInfo = document.querySelectorAll('#createTravelForm input').values();
+          console.log(newTravelInfo);
         }
     }
     // method creat member
