@@ -49,6 +49,11 @@ button {
   align-items: center;
   justify-content: space-around;
 }
+#createTravelForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 /* step2 */
 #travelManagement {
