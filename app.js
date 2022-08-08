@@ -49,11 +49,11 @@ let destination = document.querySelector('#destination'),
            // display MessageBox
            displayMsg(msg) {
             // create message box
-            const MessageBox = document.createElement('div')
+            const MessageBox = document.createElement('p');
             MessageBox.innerText = msg;
-    
+            document.querySelector('#createTravelForm .error').getElementsByClassName.display ="block"
             // show message
-            createTravelForm.appendChild(MessageBox)
+            document.querySelector('#createTravelForm .error').appendChild(MessageBox)
     
             // remove message box
             setTimeout(function () {
