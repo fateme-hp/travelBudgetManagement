@@ -37,6 +37,17 @@ button {
   text-align: center;
   padding: 10px;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px white inset !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+input[data-autocompleted] {
+  background-color: #fff !important;
+}
+
 /* step1 */
 #createTravel {
   margin: 2%;
@@ -48,7 +59,7 @@ button {
   border-radius: 5px;
   /* display: none; */
 }
-#createTravel h2{
+#createTravel h2 {
   font-size: 30px;
   margin: 20px 25px;
 }
@@ -63,27 +74,25 @@ button {
   flex-direction: column;
   align-items: flex-start;
 }
-#createTravelForm *{
+#createTravelForm * {
   width: 250px;
   margin-top: 6px;
 }
 #createTravelForm button {
-  margin-top:15px;
+  margin-top: 15px;
   width: 100px;
-  background-color: #2C7DFF;
+  background-color: #2c7dff;
   color: #fff;
   border: none;
   outline: none;
   border-radius: 3px;
   display: inline-block;
-  
 }
 #createTravelForm button:hover {
   background-color: #fff;
-  border:2px solid #2C7DFF;
-  color: #2C7DFF;
+  border: 2px solid #2c7dff;
+  color: #2c7dff;
 }
-
 
 /* step2 */
 #travelManagement {
@@ -95,7 +104,7 @@ button {
   background-color: #fff;
   border-radius: 5px;
   padding: 25px;
-  display: none;
+  /* display: none; */
 }
 #budget {
   margin: 30px auto;
@@ -109,8 +118,8 @@ button {
   padding: 20px;
   flex: 1 0 50%;
 }
-#budgetManagement *{
-    margin-top: 20px;
+#budgetManagement * {
+  margin-top: 20px;
 }
 #expenseCat {
   display: flex;
@@ -119,13 +128,33 @@ button {
   padding: 20px;
 }
 .categoryBtn {
-    width: 100px;
-    height: 100px;
-  }
-  #delBtn{
-      height: 40px;
-      width: 100px;
-  }
+  width: 100px;
+  height: 100px;
+}
+#delBtn {
+  height: 40px;
+  width: 100px;
+}
+#travelInfo, #travelData {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+#travelInfo{
+  width: 890px;
+  /* border: 1px solid #2c7dff; */
+border-radius: 5px;
+background-color: #EFF0F8;
+}
+#travelData *{
+margin-top:10px;
+}
+#travelData span {
+  margin-left: 10px;
+}
+
+
+
 /* step3 */
 
 .category {
