@@ -112,7 +112,7 @@ class Travel{
         if(!desc.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
             const parent01 = document.querySelector('#createTravelForm'),
                 child01 = document.querySelector('#createTravelForm label');
-                        new UserInterface().displayErrorMsg(` لطفا همه ی فیلد ها را پر کنید.`, parent01, child01);
+                new UserInterface().displayErrorMsg(` لطفا همه ی فیلد ها را پر کنید. `, parent01, child01);
         } else{
            
           let  newTravelInfo = document.querySelectorAll('#createTravelForm input');
@@ -161,8 +161,8 @@ class Budget{
     // adding to wallet
     addToWallet(){
        if( typeof newWalletAmount.value =="number"|| !newWalletAmount.value ){
-            const errorMsg = new UserInterface().displayMsg(`لطفا مقادیر را به درستی وارد کنید.`),
-            valueError = document.createElement('div');
+             new UserInterface().displayMsg(`لطفا مقادیر را به درستی وارد کنید.`);
+            
             valueError.classList.add="error";
             addToBudgetForm.appendChild(valueError);
             valueError.append(errorMsg);
