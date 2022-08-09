@@ -11,14 +11,29 @@ let destination = document.querySelector('#destination'),
     memberWallet = document.querySelector('#memberWallet'),
     travelData= document.querySelector('#travelData'),
     travelManagement = document.querySelector('#travelManagement'),
-    createMemberBtn = document.querySelector('#BtnCreateHousehold');
+    createMemberBtn = document.querySelector('#BtnCreateHousehold'),
+    descInfo = localStorage.getItem('description'),
+    travelArray = JSON.parse(localStorage.getItem("travel") || "[]");
+   
     
 
     
     // eventListeners
     // check if travel exist
     document.addEventListener('DOMContentLoaded' , function(){
-    
+        if (travelArray.length ===0){
+            createTravel.style.display="flex"
+        }
+        else{
+            for (let i = 0; i < travelArray.length; i++) {
+                const infoSpan = document.querySelectorAll('.infoSpan');
+                    infoSpan[i].append(travelArray[i])
+              }
+               descInfo = localStorage.getItem('description');
+              document.querySelector('#travelInfo p').append(descInfo);
+
+            new UserInterface().showManagement();
+        }
     })
     // createTravel 
     createTravelBtn.addEventListener('click', function(e){
@@ -63,6 +78,10 @@ let destination = document.querySelector('#destination'),
                 MessageBox.remove()
             }, 6000)
         }
+        showManagement(){
+            createTravel.style.display ="none";
+            travelManagement.style.display="flex"
+        }
     }
 class Travel{
     
@@ -78,18 +97,24 @@ class Travel{
         if(!desc.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
            new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
         } else{
-            travelManagement.style.display="flex"
+           
           let  newTravelInfo = document.querySelectorAll('#createTravelForm input');
 
           for (let i = 0; i < newTravelInfo.length; i++) {
             const infoSpan = document.querySelectorAll('.infoSpan');
                 infoSpan[i].append(newTravelInfo[i].value)
+                travelArray.push(newTravelInfo[i].value);
+                console.log(travelArray);
+                localStorage.setItem('travel', JSON.stringify(travelArray))
           }
           let newTravelDesc= document.querySelector('#createTravelForm textarea');
-          document.querySelector('#travelInfo p').append(newTravelDesc.value)
-          
+          document.querySelector('#travelInfo p').append(newTravelDesc.value);
+          localStorage.setItem('description', newTravelDesc.value) 
+          createTravelForm.reset();
+          new UserInterface().showManagement();
         }
     }
+    
     // method creat member
     addMemberOfHousehold(){
 
