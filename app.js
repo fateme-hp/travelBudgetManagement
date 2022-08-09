@@ -13,6 +13,10 @@ let destination = document.querySelector('#destination'),
     travelManagement = document.querySelector('#travelManagement'),
     createMemberBtn = document.querySelector('#BtnCreateHousehold'),
     totalBudgetAmount = document.querySelector('#totalBudgetAmount'),
+    addToBudgetForm = document.querySelector('#addToBudgetForm'),
+    addToBudgetBtn = document.querySelector('#addToBudgetBtn'),
+    addToBudget = document.querySelector('#addToBudget'),
+    newWalletAmount = document.querySelector('#newWallet'),
     descInfo = localStorage.getItem('description'),
     travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
     totalBudget = localStorage.getItem("totalBudget") || 0 ;
@@ -63,6 +67,13 @@ let destination = document.querySelector('#destination'),
             console.log(Household);
         }
 
+    })
+
+    addToBudget.addEventListener('click', function(){
+        new Budget().addToBudget()
+    })
+    addToBudgetBtn.addEventListener('click', function(){
+        new Budget().addToWallet()
     })
 
     class UserInterface{
@@ -139,6 +150,21 @@ class Budget{
         totalBudget += budget;
         localStorage.setItem('totalBudget', totalBudget);
         return totalBudget
+    }
+    // add to budget btn
+    addToBudget(){
+        addToBudgetForm.style.display="block";
+        addToBudget.disabled = true;
+    }
+    // adding to wallet
+    addToWallet(){
+       if( typeof newWalletAmount.value =="number"|| !newWalletAmount.value ){
+            const errorMsg = new UserInterface().displayMsg(`لطفا مقادیر را به درستی وارد کنید.`),
+            valueError = document.createElement('div');
+            valueError.classList.add="error";
+            addToBudgetForm.appendChild(valueError);
+            valueError.append(errorMsg);
+       }
     }
    
 }
