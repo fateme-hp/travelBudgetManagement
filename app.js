@@ -52,11 +52,12 @@ let destination = document.querySelector('#destination'),
 
         // check the value of fields are correct
         if(fullName ==="" || wallet ===""){
-            UserInterface.displayMsg('لطفا مقادیر را به درستی وارد کنید.');
+            new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
 
         }else {
             const member = new Travel(fullName,wallet);
-            
+            const Household =  Travel(fullName,wallet).addMemberOfHousehold();
+            console.log(Household);
         }
 
     })
@@ -117,7 +118,7 @@ class Travel{
     
     // method creat member
     addMemberOfHousehold(){
-
+        localStorage.setItem()
 
     }
 }
