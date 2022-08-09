@@ -12,8 +12,10 @@ let destination = document.querySelector('#destination'),
     travelData= document.querySelector('#travelData'),
     travelManagement = document.querySelector('#travelManagement'),
     createMemberBtn = document.querySelector('#BtnCreateHousehold'),
+    totalBudgetAmount = document.querySelector('#totalBudgetAmount'),
     descInfo = localStorage.getItem('description'),
-    travelArray = JSON.parse(localStorage.getItem("travel") || "[]");
+    travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
+    totalBudget = localStorage.getItem("totalBudget") || 0 ;
    
     
 
@@ -27,10 +29,11 @@ let destination = document.querySelector('#destination'),
         else{
             for (let i = 0; i < travelArray.length; i++) {
                 const infoSpan = document.querySelectorAll('.infoSpan');
-                    infoSpan[i].append(travelArray[i])
+                    infoSpan[i].append(` ${travelArray[i]} `)
               }
                descInfo = localStorage.getItem('description');
-              document.querySelector('#travelInfo p').append(descInfo);
+              document.querySelector('#travelInfo p').append(` ${descInfo} `);
+              totalBudgetAmount.append(` ${totalBudget} `);
 
             new UserInterface().showManagement();
         }
@@ -115,10 +118,27 @@ class Travel{
           new UserInterface().showManagement();
         }
     }
+
     
     // method creat member
     addMemberOfHousehold(){
         localStorage.setItem()
 
     }
+}
+
+
+
+
+class Budget{
+    constructor(){}
+
+     // methods
+    // total budget
+    budgetAmount(budget) {
+        totalBudget += budget;
+        localStorage.setItem('totalBudget', totalBudget);
+        return totalBudget
+    }
+   
 }
