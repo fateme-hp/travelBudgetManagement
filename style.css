@@ -152,8 +152,19 @@ margin-top:10px;
 #travelData span {
   margin-left: 10px;
 }
-
-
+#addToBudgetForm{
+  display: none;
+}
+#addToBudgetForm input{
+  width: 110px;
+}
+#addToBudgetBtn , #addToBudget {
+  background-color: #2c7dff;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+}
 
 /* step3 */
 
