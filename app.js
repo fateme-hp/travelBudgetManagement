@@ -45,7 +45,7 @@ let destination = document.querySelector('#destination'),
     // createTravel 
     createTravelBtn.addEventListener('click', function(e){
         e.preventDefault()
-        const newTravel = new Travel().createTravel()
+        const newTravel = new Travel().createTravel();
 
     })
 
@@ -59,7 +59,7 @@ let destination = document.querySelector('#destination'),
 
         // check the value of fields are correct
         if(fullName ==="" || wallet ===""){
-            new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
+            new UserInterface().displayErrorMsg(` لطفا همه ی فیلد ها را پر کنید.`)
 
         }else {
             const member = new Travel(fullName,wallet);
@@ -70,47 +70,49 @@ let destination = document.querySelector('#destination'),
     })
 
     addToBudget.addEventListener('click', function(){
-        new Budget().addToBudget()
+        new Budget().addToBudget();
     })
     addToBudgetBtn.addEventListener('click', function(){
-        new Budget().addToWallet()
+        new Budget().addToWallet();
     })
 
     class UserInterface{
-        constructor(){}
+        constructor(){};
     
            // display MessageBox
-           displayMsg(msg) {
+           displayErrorMsg(msg, parent, child) {
             // create message box
-            const MessageBox = document.createElement('p');
+            const MessageBox = document.createElement('div');
             MessageBox.innerText = msg;
-            document.querySelector('#createTravelForm .error').getElementsByClassName.display ="block"
+            MessageBox.classList = 'error';
             // show message
-            document.querySelector('#createTravelForm .error').appendChild(MessageBox)
+            parent.insertBefore(MessageBox ,child);
     
             // remove message box
             setTimeout(function () {
                 MessageBox.remove()
             }, 6000)
-        }
+        };
         showManagement(){
             createTravel.style.display ="none";
             travelManagement.style.display="flex"
-        }
-    }
+        };
+    };
 class Travel{
     
     constructor(fullName,wallet){
         this.fullName = fullName;
         this.wallet = wallet;
-    }
+    };
 
     // methods
     // method create travel
     createTravel(){
        
         if(!desc.value || !destination.value || !passenger.value || !startDate.value || !endDate.value) {
-           new UserInterface().displayMsg(` لطفا همه ی فیلد ها را پر کنید.`)
+            const parent01 = document.querySelector('#createTravelForm'),
+                child01 = document.querySelector('#createTravelForm label');
+                        new UserInterface().displayErrorMsg(` لطفا همه ی فیلد ها را پر کنید.`, parent01, child01);
         } else{
            
           let  newTravelInfo = document.querySelectorAll('#createTravelForm input');
@@ -128,7 +130,7 @@ class Travel{
           createTravelForm.reset();
           new UserInterface().showManagement();
         }
-    }
+    };
 
     
     // method creat member
@@ -136,7 +138,7 @@ class Travel{
         localStorage.setItem()
 
     }
-}
+};
 
 
 
@@ -150,12 +152,12 @@ class Budget{
         totalBudget += budget;
         localStorage.setItem('totalBudget', totalBudget);
         return totalBudget
-    }
+    };
     // add to budget btn
     addToBudget(){
         addToBudgetForm.style.display="block";
         addToBudget.disabled = true;
-    }
+    };
     // adding to wallet
     addToWallet(){
        if( typeof newWalletAmount.value =="number"|| !newWalletAmount.value ){
@@ -165,6 +167,6 @@ class Budget{
             addToBudgetForm.appendChild(valueError);
             valueError.append(errorMsg);
        }
-    }
+    };
    
 }
