@@ -52,7 +52,7 @@ let destination = document.querySelector('#destination'),
     })
 
     // creat Member Household
-    createMemberBtn.addEventListener('click' , function(e){
+    createMemberBtn.addEventListener('submit' , function(e){
         e.preventDefault();
 
         // read value from form
@@ -65,8 +65,8 @@ let destination = document.querySelector('#destination'),
 
         }else {
             const member = new Travel(fullName,wallet);
-            const Household =  Travel(fullName,wallet).addMemberOfHousehold();
-            console.log(Household);
+            // const Household =  Travel(fullName,wallet).addMemberOfHousehold();
+            console.log(member);
         }
 
     })
