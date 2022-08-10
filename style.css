@@ -202,3 +202,16 @@ margin-top:10px;
 .category * {
   margin-bottom: 10px;
 }
+#stateOfHouseholds{
+  display: flex;
+  padding: 25px;
+  width: 100%;
+ justify-content: space-between;
+
+}
+#memberOfHousehold{
+  width: 350px;
+}
+#memberOfHousehold span{
+  margin-left: 50px;
+}

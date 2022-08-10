@@ -28,6 +28,7 @@ let destination = document.querySelector("#destination"),
   getTransportHousehold = document.querySelector("#getTransportHousehold"),
   getRoomHousehold = document.querySelector("#getRoomHousehold"),
   getOtherHousehold = document.querySelector("#getOtherHousehold"),
+  memberOfHousehold = document.querySelector("#memberOfHousehold"),
   descInfo = document.querySelector("description"),
   travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
@@ -200,8 +201,21 @@ class Household {
       // getRoomHousehold.appendChild(tag);
       // getOtherHousehold.appendChild(tag);
       // getTransportHousehold.appendChild(tag);
-      // tag.append(householdArray[i]);
-    
+
+    const listTag = document.createElement('li'),
+    memberName = document.createElement('span'),
+    memberBudget = document.createElement('span'),
+    memberState = document.createElement('span');
+    const orderList = document.querySelector('#memberOfHousehold ol');
+    orderList.appendChild(listTag);
+    listTag.classList.add("member");
+    memberName.classList.add( "memberName");
+    memberBudget.classList.add("memberBudget");
+    memberState.classList.add("memberState");
+    memberName.innerText = householdArray[i];
+    listTag.append(memberName);
+    listTag.append(memberBudget);
+    listTag.append(memberState);
     }
   }
 
@@ -237,9 +251,18 @@ class Household {
           localStorage.setItem("household", JSON.stringify(householdArray));
 
           new Household().addMemberOfHousehold(getHousehold);
+          // new Household().householdBudgetState();
+
         }
       }
     }
+  }
+
+  // household budget state 
+  householdBudgetState(){
+    
+
+
   }
   
 }
@@ -256,7 +279,7 @@ class Budget {
   }
   // adding to wallet
   addToWallet() {
-    if (typeof newWalletAmount.value == "number" || !newWalletAmount.value) {
+    if (typeof newWalletAmount.value == "number" || !newWalletAmount.value || getHousehold.value =="") {
       const budgetFormChild = document.querySelector("#addToBudgetForm label");
       new UserInterface().displayErrorMsg(
         `لطفا مقادیر را به درستی وارد کنید.`,
