@@ -65,7 +65,7 @@
             <div>
               <button id="addToBudget">افزایش موجودی</button>
               <button>وضعیت</button>
-              <button>ایجاد خانوار جدید</button>
+              <button id="createNewHousehold">ایجاد خانوار جدید</button>
             </div>
           </div>
           <div id="expenseCat">
@@ -84,8 +84,8 @@
           <h3>غذا</h3>
           <div>
             <form action="" id="food">
-              <label for="getfoodHousehold">انتخاب نام خانوار</label>
-              <select name="getfoodHousehold" id="getfoodHousehold" class="household"></select>
+              <label for="getFoodHousehold">انتخاب نام خانوار</label>
+              <select name="getFoodHousehold" id="getFoodHousehold" class="household"></select>
               <label for="">عنوان</label>
               <input type="text">
               <label for="">هزینه</label>
@@ -189,8 +189,8 @@
           <h3>غذا</h3>
           <div>
             <form action="" id="other">
-              <label for="getotherHousehold">انتخاب نام خانوار</label>
-              <select name="getotherHousehold" id="getotherHousehold" class="household"></select>
+              <label for="getOtherHousehold">انتخاب نام خانوار</label>
+              <select name="getOtherHousehold" id="getOtherHousehold" class="household"></select>
               <label for="">عنوان</label>
               <input type="text">
               <label for="">هزینه</label>
@@ -210,20 +210,18 @@
             </div>
           </div>
       </div>
-      <div id="creatHousehold" class="category">
+      <div id="createHousehold" class="category">
         <h3>ایجاد خانوار جدید</h3>
         <div>
           <form action="" id="BtnCreateHousehold">
             <label for="">نام خانوار</label>
             <input type="text" id="memberName">
-            <label for="">کیف پول شما</label>
-            <input type="text" id="memberWallet">
-            <button> ثبت خانوار </button>
+            <button type="submit"> ثبت خانوار </button>
           </form>
 
-          <div id="memberOfHousehold" class="expense">
+          <div id="memberOfHousehold" >
             <h4></h4>
-              <div class="costs">
+              <div >
                 <ol>
                   <li></li>
                 </ol>
