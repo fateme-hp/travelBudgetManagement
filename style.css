@@ -65,6 +65,7 @@ button:disabled{
   align-items: flex-start;
   background-color: #fff;
   border-radius: 5px;
+  
 }
 #createTravel h2 {
   font-size: 30px;
@@ -100,6 +101,7 @@ button:disabled{
   border: 2px solid #2c7dff;
   color: #2c7dff;
 }
+
 
 /* step2 */
 #travelManagement {
@@ -165,7 +167,7 @@ margin-top:10px;
 #addToBudgetForm input{
   width: 110px;
 }
-#addToBudgetBtn , #addToBudget , #delBtn{
+#addToBudgetBtn , #addToBudget , #delBtn, #createNewHousehold{
   background-color: #2c7dff;
   color: #fff;
   border: none;
@@ -190,7 +192,7 @@ margin-top:10px;
   align-items: flex-start;
   background-color: #fff;
   border-radius: 5px;
-  /* display: none; */
+  display: none;
 }
 .category form {
   display: flex;
