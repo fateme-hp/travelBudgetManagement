@@ -15,6 +15,7 @@ let destination = document.querySelector("#destination"),
   createMemberBtn = document.querySelector("#BtnCreateHousehold"),
   createNewHousehold = document.querySelector("#createNewHousehold"),
   createHousehold = document.querySelector("#createHousehold"),
+  submitHousehold = document.querySelector("#submitHousehold"),
   totalBudgetAmount = document.querySelector("#totalBudgetAmount"),
   addToBudgetForm = document.querySelector("#addToBudgetForm"),
   addToBudgetBtn = document.querySelector("#addToBudgetBtn"),
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     createTravel.style.display = "flex";
 } else {
       new UserInterface().showManagement();
+      
     for (let i = 0; i < travelArray.length; i++) {
       const infoSpan = document.querySelectorAll(".infoSpan");
       infoSpan[i].append(` ${travelArray[i]} `);
@@ -77,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     descInfo = localStorage.getItem("description");
     document.querySelector("#travelInfo p").append(` ${descInfo} `);
     totalBudgetAmount.append(` ${totalBudget} `);
-
+    new Household().addMemberOfHousehold();
   }
 });
 // createTravel
@@ -109,6 +111,10 @@ createNewHousehold.addEventListener("click", function () {
   travelManagement.style.display = "none";
   createHousehold.style.display = "flex";
 });
+submitHousehold.addEventListener("submit", function(e){
+  e.preventDefault();
+  new Household().createMember();
+})
 
 backBtn.addEventListener("click", function () {
   travelManagement.style.display = "none";
@@ -180,6 +186,26 @@ class Household {
   constructor() {}
 
   // methods
+  // method create member
+  addMemberOfHousehold() {
+    for (let i = 0; i < householdArray.length; i++) {
+      console.log(householdArray[i]);
+      const tag = document.createElement('option');
+     
+      tag.value=householdArray[i];
+      tag.innerText=householdArray[i];
+      getHousehold .appendChild(tag);
+      // getFoodHousehold.appendChild(tag);
+      // getEntHousehold.appendChild(tag);
+      // getRoomHousehold.appendChild(tag);
+      // getOtherHousehold.appendChild(tag);
+      // getTransportHousehold.appendChild(tag);
+      // tag.append(householdArray[i]);
+    
+    }
+  }
+
+
   createMember() {
     // read value from form
     let fullName = memberName.value;
@@ -209,22 +235,13 @@ class Household {
           householdArray.push(fullName);
           console.log(householdArray);
           localStorage.setItem("household", JSON.stringify(householdArray));
+
+          new Household().addMemberOfHousehold(getHousehold);
         }
       }
     }
   }
-  // method create member
-  addMemberOfHousehold() {
-    localStorage.setItem();
-    //  const member = document.createElement('option');
-    //  member.innerText= fullName;
-    //  getHousehold.appendChild(member).append(fullName);
-    //  getFoodHousehold.appendChild(member);
-    //  getEntHousehold.appendChild(member);
-    //  getRoomHousehold.appendChild(member);
-    //  getOtherHousehold.appendChild(member);
-    //  getTransportHousehold.appendChild(member);
-  }
+  
 }
 
 class Budget {
