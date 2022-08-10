@@ -21,9 +21,24 @@ let destination = document.querySelector('#destination'),
     delBtn= document.querySelector('#delBtn'),
     descInfo = localStorage.getItem('description'),
     travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
-    totalBudget = localStorage.getItem("totalBudget") || 0 ;
-   
-    
+    totalBudget = localStorage.getItem("totalBudget") || 0,
+    addCostRegBtn = document.querySelectorAll('.addCostReg'),
+    categoryCost = document.querySelector('#expenseCat'),
+    categoryCost2 = categoryCost.getElementsByTagName('button'),
+    categoryCostChildCount = categoryCost2.length;
+
+
+// to change display 
+for(i = 0 ; i< 5 ;i++ ){
+    // replace into the name of button to id div category
+    divCostReg = categoryCost2[i].id.replace('Btn', 'Category');
+    // event for every button clicked changing display that div
+    categoryCost2[i].addEventListener('click' , function(){
+        let show = document.getElementById(`${divCostReg}`);
+        show.style.display = "flex"
+    })
+
+}
 
     
     // eventListeners
@@ -83,6 +98,11 @@ let destination = document.querySelector('#destination'),
         createTravel.style.display ="flex";
         travelManagement.style.display ="none";
     })
+
+    // creat event for Cost registration 
+    // categoryCost.addEventListener('click', function(){
+
+    // })
     
 
     class UserInterface{
@@ -183,5 +203,7 @@ class Budget{
         localStorage.setItem('totalBudget', totalBudget);
         return totalBudget
     };
+
+    // costRegistration(){}
    
 }
