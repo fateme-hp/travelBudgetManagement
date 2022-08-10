@@ -30,7 +30,25 @@ let destination = document.querySelector("#destination"),
   descInfo = document.querySelector("description"),
   travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
-  totalBudget = localStorage.getItem("totalBudget") || 0;
+  totalBudget = localStorage.getItem("totalBudget") || 0,
+  addCostRegBtn = document.querySelectorAll('.addCostReg'),
+  categoryCost = document.querySelector('#expenseCat'),
+  categoryCost2 = categoryCost.getElementsByTagName('button'),
+  categoryCostChildCount = categoryCost2.length;
+
+
+// to change display 
+for(i = 0 ; i< 5 ;i++ ){
+  // replace into the name of button to id div category
+  divCostReg = categoryCost2[i].id.replace('Btn', 'Category');
+  // event for every button clicked changing display that div
+  categoryCost2[i].addEventListener('click' , function(){
+      let show = document.getElementById(`${divCostReg}`);
+      show.style.display = "flex"
+  })
+
+}
+
 
 // eventListeners
 // check if travel exist
