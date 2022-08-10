@@ -38,8 +38,8 @@ let destination = document.querySelector("#destination"),
   categoryCost2 = categoryCost.getElementsByTagName('button'),
   backBtn = document.querySelectorAll('.backHome'),
   categoryDiv = document.querySelectorAll('.category'),
+  householdSelect = document.querySelectorAll('.household'),
   categoryCostChildCount = categoryCost2.length;
-  console.log(backBtn);
 
 
 // add this functionality to NodeList for we can add event handler for nodelist
@@ -118,8 +118,10 @@ submitHousehold.addEventListener("submit", function(e){
 })
 
 backBtn.addEventListener("click", function () {
-  travelManagement.style.display = "none";
-  createHousehold.style.display = "flex";
+  for(i = 0 ; i<categoryDiv.length ; i++){
+    categoryDiv[i].style.display = 'none';
+    travelManagement.style.display = 'flex';
+  }
 });
 
 class UserInterface {
@@ -216,6 +218,15 @@ class Household {
     listTag.append(memberName);
     listTag.append(memberBudget);
     listTag.append(memberState);
+    }
+    // for add member option into select in every category
+    for( const value of householdArray.values()){
+      let householdName = document.createElement('option');
+      householdName.value = value;
+      householdName.innerText= value;
+      for( const value1 of householdSelect.values()){
+      value1.appendChild(householdName)
+      }
     }
   }
 
