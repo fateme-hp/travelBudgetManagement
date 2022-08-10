@@ -34,17 +34,30 @@ let destination = document.querySelector("#destination"),
   addCostRegBtn = document.querySelectorAll('.addCostReg'),
   categoryCost = document.querySelector('#expenseCat'),
   categoryCost2 = categoryCost.getElementsByTagName('button'),
+  backBtn = document.querySelectorAll('.backHome'),
+  categoryDiv = document.querySelectorAll('.category'),
   categoryCostChildCount = categoryCost2.length;
+  console.log(backBtn);
 
 
+// add this functionality to NodeList for we can add event handler for nodelist
+  NodeList.prototype.addEventListener = function (event_name, callback, useCapture)
+{
+    for (var i = 0; i < this.length; i++)
+    {
+      this[i].addEventListener(event_name, callback, useCapture);
+    }
+};
+  
 // to change display 
 for(i = 0 ; i< 5 ;i++ ){
   // replace into the name of button to id div category
   divCostReg = categoryCost2[i].id.replace('Btn', 'Category');
   // event for every button clicked changing display that div
   categoryCost2[i].addEventListener('click' , function(){
-      let show = document.getElementById(`${divCostReg}`);
-      show.style.display = "flex"
+    let show = document.getElementById(`${divCostReg}`);
+    show.style.display = "flex";
+    travelManagement.style.display = "none";
   })
 
 }
@@ -93,6 +106,11 @@ delBtn.addEventListener("click", function () {
   // travelManagement.style.display = "none";
 });
 createNewHousehold.addEventListener("click", function () {
+  travelManagement.style.display = "none";
+  createHousehold.style.display = "flex";
+});
+
+backBtn.addEventListener("click", function () {
   travelManagement.style.display = "none";
   createHousehold.style.display = "flex";
 });
