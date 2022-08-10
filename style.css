@@ -165,13 +165,20 @@ margin-top:10px;
 #addToBudgetForm input{
   width: 110px;
 }
-#addToBudgetBtn , #addToBudget {
+#addToBudgetBtn , #addToBudget , #delBtn{
   background-color: #2c7dff;
   color: #fff;
   border: none;
   outline: none;
   border-radius: 3px;
 }
+#delBtn{
+  background-color: #e43a51;
+}
+#delBtn:hover{
+  background-color: #ff0022;
+}
+
 
 /* step3 */
 

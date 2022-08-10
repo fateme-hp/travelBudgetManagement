@@ -18,6 +18,7 @@ let destination = document.querySelector('#destination'),
     addToBudget = document.querySelector('#addToBudget'),
     newWalletAmount = document.querySelector('#newWallet'),
     householdBudgetForm = document.querySelector('#householdBudgetForm'),
+    delBtn= document.querySelector('#delBtn'),
     descInfo = localStorage.getItem('description'),
     travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
     totalBudget = localStorage.getItem("totalBudget") || 0 ;
@@ -76,6 +77,11 @@ let destination = document.querySelector('#destination'),
     addToBudgetBtn.addEventListener('click', function(){
        
         new Budget().addToWallet();
+    })
+    delBtn.addEventListener('click' , function (){
+        localStorage.clear();
+        createTravel.style.display ="flex";
+        travelManagement.style.display ="none";
     })
     
 
