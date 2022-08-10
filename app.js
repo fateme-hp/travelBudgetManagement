@@ -17,6 +17,7 @@ let destination = document.querySelector('#destination'),
     addToBudgetBtn = document.querySelector('#addToBudgetBtn'),
     addToBudget = document.querySelector('#addToBudget'),
     newWalletAmount = document.querySelector('#newWallet'),
+    householdBudgetForm = document.querySelector('#householdBudgetForm'),
     descInfo = localStorage.getItem('description'),
     travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
     totalBudget = localStorage.getItem("totalBudget") || 0 ;
@@ -73,8 +74,10 @@ let destination = document.querySelector('#destination'),
         new Budget().addToBudget();
     })
     addToBudgetBtn.addEventListener('click', function(){
+       
         new Budget().addToWallet();
     })
+    
 
     class UserInterface{
         constructor(){};
@@ -147,12 +150,7 @@ class Budget{
     constructor(){}
 
      // methods
-    // total budget
-    budgetAmount(budget) {
-        totalBudget += budget;
-        localStorage.setItem('totalBudget', totalBudget);
-        return totalBudget
-    };
+ 
     // add to budget btn
     addToBudget(){
         addToBudgetForm.style.display="block";
@@ -160,13 +158,24 @@ class Budget{
     };
     // adding to wallet
     addToWallet(){
-       if( typeof newWalletAmount.value =="number"|| !newWalletAmount.value ){
-             new UserInterface().displayMsg(`لطفا مقادیر را به درستی وارد کنید.`);
-            
-            valueError.classList.add="error";
-            addToBudgetForm.appendChild(valueError);
-            valueError.append(errorMsg);
+        
+       if( typeof newWalletAmount.value =="number"|| !newWalletAmount.value){
+             const budgetFormChild = document.querySelector('#addToBudgetForm label')
+             new UserInterface().displayErrorMsg(`لطفا مقادیر را به درستی وارد کنید.`, addToBudgetForm, budgetFormChild);               
+       } else{
+        const newAmount = Number(newWalletAmount.value);
+        new Budget().budgetAmount(newAmount);
+        newWalletAmount.value="";
+        addToBudget.disabled = false;
+        addToBudgetForm.style.display="none";
+        location.reload();
        }
+    };
+       // total budget
+       budgetAmount(budget) {
+        totalBudget = Number(totalBudget) + budget;
+        localStorage.setItem('totalBudget', totalBudget);
+        return totalBudget
     };
    
 }

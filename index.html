@@ -51,16 +51,16 @@
         <div id="budget">
           <div id="budgetManagement">
             <h2>مدیریت بودجه</h2>
-           <div>
+           <form id="householdBudgetForm">
             <label for="household">انتخاب خانوار</label>
             <select name="household" id="household" class="household">
               <option value="">انتخاب کنید</option>
             </select>
-           </div>
+           </form>
            <div id="addToBudgetForm">
             <label for="">مبلغ به تومان: </label>
-            <input type="text" min="10000" id="newWallet">
-            <button id="addToBudgetBtn"> افزودن به کیف پول</button>
+            <input type="text"  id="newWallet">
+            <button id="addToBudgetBtn" type="submit"> افزودن به کیف پول</button>
            </div>
             <div>
               <button id="addToBudget">افزایش موجودی</button>
