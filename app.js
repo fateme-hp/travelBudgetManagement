@@ -367,6 +367,12 @@ class Budget {
 }
 class Expense {
   constructor(){}
+  addExpense(household,title,price){
+    let userData = {title,price}
+    localStorage.setItem('household' , JSON.stringify(userData) );
+    let stored = JSON.parse(localStorage.getItem(household));
+    // console.log(stored);
+  }
   
   food(){
     if(typeof foodCost.value == "number" || !foodCost.value || getFoodHousehold.value == "" || foodTitle.value == ""){
@@ -378,6 +384,7 @@ class Expense {
       const householdNewEx = getFoodHousehold.value;
       const householdNewExTitle = foodTitle.value;
       console.log(typeof(householdNewExTitle));
+      new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense);
     }
   }
   enertainment(){
