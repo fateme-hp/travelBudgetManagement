@@ -70,6 +70,7 @@ let destination = document.querySelector("#destination"),
   transportSub = document.querySelector("#transportSub"),
   roomSub = document.querySelector("#roomSub"),
   otherSub = document.querySelector("#otherSub"),
+  exArray = JSON.parse(localStorage.getItem("exArray") || "[]");
   categoryCostChildCount = categoryCost2.length;
 
 // add this functionality to NodeList for we can add event handler for nodelist
@@ -500,10 +501,18 @@ otherSub.addEventListener("click", function (e) {
 class Expense {
   constructor() {}
   addExpense(household, title, price, category) {
-    let userData = [household, title, price, category];
-    localStorage.setItem("ex", JSON.stringify(userData));
-    let stored = JSON.parse(localStorage.getItem("ex"));
-    console.log(stored);
+    let userData = {
+      Household : household,
+      Title : title,
+      Price : price,
+      Category : category
+    };
+      exArray.forEach(function(userData, index){
+      console.log("[" + index + "]: " + userData)
+    };
+    // localStorage.setItem("ex", JSON.stringify(userData));
+    // let stored = JSON.parse(localStorage.getItem("ex"));
+    // console.log(userData);
   }
 
   food() {
