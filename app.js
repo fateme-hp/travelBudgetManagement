@@ -1,5 +1,5 @@
 //selectors
-
+// to select create travel elements 
 let destination = document.querySelector("#destination"),
   passenger = document.querySelector("#passenger"),
   startDate = document.querySelector("#startDate"),
@@ -7,32 +7,41 @@ let destination = document.querySelector("#destination"),
   createTravelBtn = document.querySelector("#createTravelBtn"),
   createTravelForm = document.querySelector("#createTravelForm"),
   desc = document.querySelector("#desc"),
+  // to select travel management elements 
+  travelData = document.querySelector("#travelData"),
+  descInfo = document.querySelector("description"),
+  travelManagement = document.querySelector("#travelManagement"),
+  // to select create household elements 
   getHousehold = document.querySelector("#household"),
   memberName = document.querySelector("#memberName"),
   memberWallet = document.querySelector("#memberWallet"),
-  travelData = document.querySelector("#travelData"),
-  travelManagement = document.querySelector("#travelManagement"),
   createMemberBtn = document.querySelector("#BtnCreateHousehold"),
   createNewHousehold = document.querySelector("#createNewHousehold"),
   createHousehold = document.querySelector("#createHousehold"),
   submitHousehold = document.querySelector("#submitHousehold"),
+  // to select add budget elements
   totalBudgetAmount = document.querySelector("#totalBudgetAmount"),
   addToBudgetForm = document.querySelector("#addToBudgetForm"),
   addToBudgetBtn = document.querySelector("#addToBudgetBtn"),
   addToBudget = document.querySelector("#addToBudget"),
   newWalletAmount = document.querySelector("#newWallet"),
   householdBudgetForm = document.querySelector("#householdBudgetForm"),
+// to select delete button
   delBtn = document.querySelector("#delBtn"),
+  // to select categories of household 
   getFoodHousehold = document.querySelector("#getFoodHousehold"),
   getEntHousehold = document.querySelector("#getEntHousehold"),
   getTransportHousehold = document.querySelector("#getTransportHousehold"),
   getRoomHousehold = document.querySelector("#getRoomHousehold"),
   getOtherHousehold = document.querySelector("#getOtherHousehold"),
   memberOfHousehold = document.querySelector("#memberOfHousehold"),
-  descInfo = document.querySelector("description"),
+  // local storage
+  // local storage arrays
   travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
+  memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
+  //  categories and expenses
   addCostRegBtn = document.querySelectorAll('.addCostReg'),
   categoryCost = document.querySelector('#expenseCat'),
   // categoryCost2 = categoryCost.getElementsByTagName('button'),
@@ -81,6 +90,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#travelInfo p").append(` ${descInfo} `);
     totalBudgetAmount.append(` ${totalBudget} `);
     new Household().addMemberOfHousehold();
+    new Household().addMemberOfFoodCat();
+    new Household().addMemberOfEntCat();
+    new Household().addMemberOfTransportCat();
+    new Household().addMemberOfRoomCat();
+    new Household().addMemberOfOthersCat();
   }
 });
 // food display
@@ -254,19 +268,13 @@ class Household {
 
   // methods
   // method create member
+  
   addMemberOfHousehold() {
     for (let i = 0; i < householdArray.length; i++) {
-      console.log(householdArray[i]);
       const tag = document.createElement('option');
-     
       tag.value=householdArray[i];
       tag.innerText=householdArray[i];
       getHousehold .appendChild(tag);
-      getFoodHousehold.appendChild(tag);
-      // getEntHousehold.appendChild(tag);
-      // getRoomHousehold.appendChild(tag);
-      // getOtherHousehold.appendChild(tag);
-      // getTransportHousehold.appendChild(tag);
 
     const listTag = document.createElement('li'),
     memberName = document.createElement('span'),
@@ -282,6 +290,51 @@ class Household {
     listTag.append(memberName);
     listTag.append(memberBudget);
     listTag.append(memberState);
+    }
+  }
+  addMemberOfFoodCat() {
+    for (let i = 0; i < householdArray.length; i++) {
+      const tag = document.createElement('option');
+      tag.value=householdArray[i];
+      tag.innerText=householdArray[i];
+      getFoodHousehold.appendChild(tag);
+    
+    }
+  }
+  addMemberOfEntCat() {
+
+    for (let i = 0; i < householdArray.length; i++) {
+      const tag = document.createElement('option');
+      tag.value=householdArray[i];
+      tag.innerText=householdArray[i];
+      getEntHousehold.appendChild(tag);
+      
+    }
+  }
+  addMemberOfTransportCat() {
+    for (let i = 0; i < householdArray.length; i++) {
+      const tag = document.createElement('option');
+      tag.value=householdArray[i];
+      tag.innerText=householdArray[i];
+      getTransportHousehold.appendChild(tag);
+    
+    }
+  }
+  addMemberOfRoomCat() {
+    for (let i = 0; i < householdArray.length; i++) {
+      const tag = document.createElement('option');
+      tag.value=householdArray[i];
+      tag.innerText=householdArray[i];
+      getRoomHousehold.appendChild(tag);
+      
+    }
+  }
+  addMemberOfOthersCat() {
+    for (let i = 0; i < householdArray.length; i++) {
+      const tag = document.createElement('option');
+      tag.value=householdArray[i];
+      tag.innerText=householdArray[i];
+      getOtherHousehold.appendChild(tag);
     }
   }
 
@@ -333,16 +386,18 @@ class Household {
   
 }
 class Budget {
-  constructor() {}
+  constructor() { 
+   
+  }
   // methods
   // add to budget btn
   addToBudget() {
     addToBudgetForm.style.display = "block";
     addToBudget.disabled = true;
-  }
+  };
   // adding to wallet
   addToWallet() {
-    if (typeof newWalletAmount.value == "number" || !newWalletAmount.value || getHousehold.value =="") {
+    if (typeof newWalletAmount.value == "number" || !newWalletAmount.value || !getHousehold.value) {
       const budgetFormChild = document.querySelector("#addToBudgetForm label");
       new UserInterface().displayErrorMsg(
         `لطفا مقادیر را به درستی وارد کنید.`,
@@ -351,11 +406,11 @@ class Budget {
       );
     } else {
       const newAmount = Number(newWalletAmount.value);
+      new Budget().memberBudget(newAmount);
       new Budget().budgetAmount(newAmount);
       newWalletAmount.value = "";
       addToBudget.disabled = false;
       addToBudgetForm.style.display = "none";
-      location.reload();
     }
   }
   // total budget
@@ -364,6 +419,24 @@ class Budget {
     localStorage.setItem("totalBudget", totalBudget);
     return totalBudget;
   }  
+  memberBudget(budgetAmount){
+    let member = {
+      memberName : getHousehold.value,
+      newAmount : budgetAmount   
+    } ;
+    console.log(member.memberName);
+    if ( memberBudgetArray.includes(member.memberName)){
+      console.log("true");
+    } else{
+      memberBudgetArray.push(member);
+      localStorage.setItem("memberBudget", JSON.stringify(memberBudgetArray))
+    }
+   
+    new Budget().addToMemberBudget(member, budgetAmount)
+  }
+  addToMemberBudget(memberName,memberBudget){
+
+  }
 }
 class Expense {
   constructor(){}
