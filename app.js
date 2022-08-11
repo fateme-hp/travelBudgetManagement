@@ -510,12 +510,15 @@ class Expense {
       Price : price,
       Category : category
     };
-      exArray.forEach(function(userData, index){
-      console.log("[" + index + "]: " + userData)
-      });
-    // localStorage.setItem("ex", JSON.stringify(userData));
-    // let stored = JSON.parse(localStorage.getItem("ex"));
-    // console.log(userData);
+    exArray.push(userData);
+    console.log(exArray);
+    localStorage.setItem("exArray" , JSON.stringify(exArray))
+    console.log(exArray);
+  }
+  totalExpense(title,price,category){
+    let totalEx = {
+      
+    }
   }
 
   food() {
@@ -655,4 +658,3 @@ class Expense {
     }
   }
 }
-console.log(entertainmentCost.value);
