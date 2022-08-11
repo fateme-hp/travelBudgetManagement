@@ -35,10 +35,16 @@ let destination = document.querySelector("#destination"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
   addCostRegBtn = document.querySelectorAll('.addCostReg'),
   categoryCost = document.querySelector('#expenseCat'),
-  categoryCost2 = categoryCost.getElementsByTagName('button'),
+  // categoryCost2 = categoryCost.getElementsByTagName('button'),
+  categoryCost2 = document.querySelectorAll('.categoryBtn'),
   backBtn = document.querySelectorAll('.backHome'),
   categoryDiv = document.querySelectorAll('.category'),
   householdSelect = document.querySelectorAll('.household'),
+  foodCat = document.querySelector("#foodCategory"),
+  entCat = document.querySelector("#entCategory"),
+  transportCat = document.querySelector("#transportCategory"),
+  roomCat = document.querySelector("#roomCategory"),
+  otherCat = document.querySelector("#othersCategory"),
   categoryCostChildCount = categoryCost2.length;
 
 
@@ -50,21 +56,6 @@ let destination = document.querySelector("#destination"),
       this[i].addEventListener(event_name, callback, useCapture);
     }
 };
-  
-// to change display 
-for(i = 0 ; i< 5 ;i++ ){
-  // replace into the name of button to id div category
-  divCostReg = categoryCost2[i].id.replace('Btn', 'Category');
-  // event for every button clicked changing display that div
-  categoryCost2[i].addEventListener('click' , function(){
-    let show = document.getElementById(`${divCostReg}`);
-    show.style.display = "flex";
-    travelManagement.style.display = "none";
-  })
-
-}
-
-
 // eventListeners
 // check if travel exist
 document.addEventListener("DOMContentLoaded", function () {
@@ -83,6 +74,26 @@ document.addEventListener("DOMContentLoaded", function () {
     new Household().addMemberOfHousehold();
   }
 });
+// food display
+document.querySelector("#foodBtn").addEventListener("click" , function(){
+  new UserInterface().foodCategory();
+})
+// ent display
+document.querySelector("#entBtn").addEventListener("click" , function(){
+  new UserInterface().entCategory();
+})
+// transport display
+document.querySelector("#transportBtn").addEventListener('click', function(){
+  new UserInterface().transportCategory()
+})
+// room display
+document.querySelector("#roomBtn").addEventListener("click" , function(){
+  new UserInterface().roomCategory()
+})
+// other display
+document.querySelector("#othersBtn").addEventListener("click" , function(){
+  new UserInterface().otherCategory()
+})
 // createTravel
 createTravelBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -144,6 +155,41 @@ class UserInterface {
   showManagement() {
     createTravel.style.display = "none";
     travelManagement.style.display = "flex";
+  }
+  foodCategory(){
+    // food category diplay
+    if(foodCat.style.display != "ex"){
+      foodCat.style.display = 'flex';
+      travelManagement.style.display = "none";
+    }
+  }
+  entCategory(){
+    // ent category display
+    if(entCat.style.display != "ex"){
+      entCat.style.display = 'flex';
+      travelManagement.style.display = "none";
+    }
+  }
+  transportCategory(){
+    // transport category display
+    if(transportCat.style.display != "ex"){
+      transportCat.style.display = 'flex';
+      travelManagement.style.display = "none";
+    }
+  }
+  roomCategory(){
+    // room category display
+    if(roomCat.style.display != "ex"){
+      roomCat.style.display = 'flex';
+      travelManagement.style.display = "none";
+    }
+  }
+  otherCategory(){
+    // other category display
+    if(otherCat.style.display != "ex"){
+      otherCat.style.display = 'flex';
+      travelManagement.style.display = "none";
+    }
   }
 }
 class Travel {
@@ -277,12 +323,9 @@ class Household {
   }
   
 }
-
 class Budget {
   constructor() {}
-
   // methods
-
   // add to budget btn
   addToBudget() {
     addToBudgetForm.style.display = "block";
@@ -312,4 +355,16 @@ class Budget {
     localStorage.setItem("totalBudget", totalBudget);
     return totalBudget;
   }
+  
+  
+  addExpense(){
+    for( let i = 0 ; i<categoryCost2.length ; i++){
+      // categoryCost2[i].addEventListener("click" , function () {
+      //   console.log(categoryCost2[i]);
+      // })
+      // console.log(categoryCost2[i]);
+    }
+  }
+  
 }
+new Budget().addExpense();
