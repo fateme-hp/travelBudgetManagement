@@ -45,8 +45,17 @@ let destination = document.querySelector("#destination"),
   transportCat = document.querySelector("#transportCategory"),
   roomCat = document.querySelector("#roomCategory"),
   otherCat = document.querySelector("#othersCategory"),
+  foodCost = document.querySelector("#foodCost"),
+  entertainmentCost = document.querySelector("#entertainmentCost"),
+  transportCost = document.querySelector("#transportCost"),
+  roomCost = document.querySelector("#roomCost"),
+  otherCost = document.querySelector("#otherCost"),
+  foodTitle = document.querySelector("#foodTitle"),
+  entertainmentTitle = document.querySelector("#enertainmentTitle"),
+  transportTitle = document.querySelector("#transportTitle"),
+  roomTitle = document.querySelector("#roomTitle"),
+  otherTitle = document.querySelector("#otherTitle"),
   categoryCostChildCount = categoryCost2.length;
-
 
 // add this functionality to NodeList for we can add event handler for nodelist
   NodeList.prototype.addEventListener = function (event_name, callback, useCapture)
@@ -75,24 +84,33 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 // food display
-document.querySelector("#foodBtn").addEventListener("click" , function(){
+document.querySelector("#foodBtn").addEventListener("click" , function(e){
   new UserInterface().foodCategory();
+  e.preventDefault()
+})
+document.querySelector("#foodSub").addEventListener("click" , function(e){
+  new Expense().food()
+  e.preventDefault()
 })
 // ent display
-document.querySelector("#entBtn").addEventListener("click" , function(){
+document.querySelector("#entBtn").addEventListener("click" , function(e){
   new UserInterface().entCategory();
+  e.preventDefault();
 })
 // transport display
-document.querySelector("#transportBtn").addEventListener('click', function(){
-  new UserInterface().transportCategory()
+document.querySelector("#transportBtn").addEventListener('click', function(e){
+  new UserInterface().transportCategory();
+  e.preventDefault();
 })
 // room display
-document.querySelector("#roomBtn").addEventListener("click" , function(){
-  new UserInterface().roomCategory()
+document.querySelector("#roomBtn").addEventListener("click" , function(e){
+  new UserInterface().roomCategory();
+  e.preventDefault();
 })
 // other display
-document.querySelector("#othersBtn").addEventListener("click" , function(){
-  new UserInterface().otherCategory()
+document.querySelector("#othersBtn").addEventListener("click" , function(e){
+  new UserInterface().otherCategory();
+  e.preventDefault();
 })
 // createTravel
 createTravelBtn.addEventListener("click", function (e) {
@@ -244,7 +262,7 @@ class Household {
       tag.value=householdArray[i];
       tag.innerText=householdArray[i];
       getHousehold .appendChild(tag);
-      // getFoodHousehold.appendChild(tag);
+      getFoodHousehold.appendChild(tag);
       // getEntHousehold.appendChild(tag);
       // getRoomHousehold.appendChild(tag);
       // getOtherHousehold.appendChild(tag);
@@ -349,9 +367,18 @@ class Budget {
 }
 class Expense {
   constructor(){}
-
+  
   food(){
-
+    if(typeof foodCost.value == "number" || !foodCost.value || getFoodHousehold.value == "" || foodTitle.value == ""){
+      let parent = document.querySelector("#food"),
+      child = document.querySelector("#food label");
+      new UserInterface().displayErrorMsg(`لطفا مقادیر را به درستی وارد کنید.`,parent , child)
+    }else{
+      const newExpense = Number(foodCost.value);
+      const householdNewEx = getFoodHousehold.value;
+      const householdNewExTitle = foodTitle.value;
+      console.log(typeof(householdNewExTitle));
+    }
   }
   enertainment(){
 
