@@ -60,13 +60,18 @@ let destination = document.querySelector("#destination"),
   roomCost = document.querySelector("#roomCost"),
   otherCost = document.querySelector("#otherCost"),
   foodTitle = document.querySelector("#foodTitle"),
-  entertainmentTitle = document.querySelector("#enertainmentTitle"),
+  entertainmentTitle = document.querySelector("#entertainmentTitle"),
   transportTitle = document.querySelector("#transportTitle"),
   roomTitle = document.querySelector("#roomTitle"),
   otherTitle = document.querySelector("#otherTitle"),
   condition = document.querySelector("#condition"),
+  foodSub = document.querySelector("#foodSub"),
+  entertainmentSub = document.querySelector("#entertainmentSub"),
+  transportSub = document.querySelector("#transportSub"),
+  roomSub = document.querySelector("#roomSub"),
+  otherSub = document.querySelector("#otherSub"),
   categoryCostChildCount = categoryCost2.length;
-
+  
 // add this functionality to NodeList for we can add event handler for nodelist
   NodeList.prototype.addEventListener = function (event_name, callback, useCapture)
 {
@@ -461,13 +466,38 @@ class Budget {
   }
   
 }
+
+foodSub.addEventListener("click" , function(e){
+  e.preventDefault();
+  new Expense().food();
+});
+
+entertainmentSub.addEventListener("click" , function(e){
+  e.preventDefault();
+  new Expense().enertainment();
+});
+
+transportSub.addEventListener("click" , function(e){
+  e.preventDefault();
+  new Expense().transport();
+});
+
+roomSub.addEventListener("click" , function(e){
+  e.preventDefault();
+  new Expense().room();
+});
+
+otherSub.addEventListener("click" , function(e){
+  e.preventDefault();
+  new Expense().other();
+});
 class Expense {
   constructor(){}
-  addExpense(household,title,price){
-    let userData = {title,price}
-    localStorage.setItem('household' , JSON.stringify(userData) );
-    let stored = JSON.parse(localStorage.getItem(household));
-    // console.log(stored);
+  addExpense(household,title,price,category){
+    let userData = [household,title,price,category];
+    localStorage.setItem('ex' , JSON.stringify(userData));
+    let stored = JSON.parse(localStorage.getItem("ex"));
+    console.log(stored);
   }
   
   food(){
@@ -480,19 +510,58 @@ class Expense {
       const householdNewEx = getFoodHousehold.value;
       const householdNewExTitle = foodTitle.value;
       console.log(typeof(householdNewExTitle));
-      new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense);
+      const category = foodCat.id
+      new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense,category);
     }
   }
   enertainment(){
-
-  }
-  transport(){
-
-  }
+    if(typeof entertainmentCost.value == "number" || !entertainmentCost.value || getEntHousehold.value == "" || entertainmentTitle.value == ""){
+      let parent = document.querySelector("#entertainment"),
+      child = document.querySelector("#entertainment label");
+      new UserInterface().displayErrorMsg(`لطفا مقادیر را به درستی وارد کنید.`,parent , child)
+    }else{
+      const newExpense = Number(entertainmentCost.value);
+      const householdNewEx = getEntHousehold.value;
+      const householdNewExTitle = entertainmentTitle.value;
+      const category = entCat.id
+      new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense,category);
+    }}
+    transport(){
+      if(typeof transportCost.value == "number" || !transportCost.value || getTransportHousehold.value == "" || transportTitle.value == ""){
+        let parent = document.querySelector("#transport"),
+        child = document.querySelector("#transport label");
+        new UserInterface().displayErrorMsg(`لطفا مقادیر را به درستی وارد کنید.`,parent , child)
+      }else{
+        const newExpense = Number(transportCost.value);
+        const householdNewEx = getTransportHousehold.value;
+        const householdNewExTitle = transportTitle.value;
+        const category = transportCat.id
+        new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense,category);}
+      }
   room(){
-
-  }
-  other(){
-
-  }
-}
+    if(typeof roomCost.value == "number" || !roomCost.value || getRoomHousehold.value == "" || roomTitle.value == ""){
+      let parent = document.querySelector("#room"),
+      child = document.querySelector("#room label");
+      new UserInterface().displayErrorMsg(`لطفا مقادیر را به درستی وارد کنید.`,parent , child)
+    }else{
+      const newExpense = Number(roomCost.value);
+      const householdNewEx = getRoomHousehold.value;
+      const householdNewExTitle = roomTitle.value;
+      const category = roomCat.id
+      new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense,category);}
+    }
+    other(){
+      if(typeof otherCost.value == "number" || !otherCost.value || getOtherHousehold.value == "" || otherTitle.value == ""){
+        let parent = document.querySelector("#food"),
+        child = document.querySelector("#food label");
+        new UserInterface().displayErrorMsg(`لطفا مقادیر را به درستی وارد کنید.`,parent , child)
+      }else{
+        const newExpense = Number(otherCost.value);
+        const householdNewEx = getOtherHousehold.value;
+        const householdNewExTitle = otherTitle.value;
+        const category = otherCat.id
+        new Expense().addExpense(householdNewEx,householdNewExTitle,newExpense,category);}
+      }
+    }
+    console.log(entertainmentCost.value);
+    
