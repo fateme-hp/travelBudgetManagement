@@ -265,15 +265,6 @@ class Household {
     listTag.append(memberBudget);
     listTag.append(memberState);
     }
-    // for add member option into select in every category
-    for( const value of householdArray.values()){
-      let householdName = document.createElement('option');
-      householdName.value = value;
-      householdName.innerText= value;
-      for( const value1 of householdSelect.values()){
-      value1.appendChild(householdName)
-      }
-    }
   }
 
 
@@ -372,6 +363,6 @@ class Expense {
 
   }
   other(){
-    
+
   }
 }
