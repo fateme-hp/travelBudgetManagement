@@ -354,17 +354,24 @@ class Budget {
     totalBudget = Number(totalBudget) + budget;
     localStorage.setItem("totalBudget", totalBudget);
     return totalBudget;
-  }
-  
-  
-  addExpense(){
-    for( let i = 0 ; i<categoryCost2.length ; i++){
-      // categoryCost2[i].addEventListener("click" , function () {
-      //   console.log(categoryCost2[i]);
-      // })
-      // console.log(categoryCost2[i]);
-    }
-  }
-  
+  }  
 }
-new Budget().addExpense();
+class Expense {
+  constructor(){}
+
+  food(){
+
+  }
+  enertainment(){
+
+  }
+  transport(){
+
+  }
+  room(){
+
+  }
+  other(){
+    
+  }
+}
