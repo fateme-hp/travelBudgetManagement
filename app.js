@@ -291,17 +291,20 @@ class Household {
       tag.innerText = householdArray[i];
       getHousehold.appendChild(tag);
 
+      
+
       const listTag = document.createElement("li"),
-        memberName = document.createElement("span"),
-        memberBudget = document.createElement("span"),
-        memberState = document.createElement("span");
+      memberName = document.createElement("span"),
+      memberBudget = document.createElement("span"),
+      memberState = document.createElement("span");
       const orderList = document.querySelector("#memberOfHousehold ol");
       orderList.appendChild(listTag);
       listTag.classList.add("member");
-      memberName.classList.add("memberName");
-      memberBudget.classList.add("memberBudget");
       memberState.classList.add("memberState");
+      memberBudget.classList.add("memberBudget");
+      memberName.classList.add("memberName");
       memberName.innerText = householdArray[i];
+      memberBudget.innerText = memberBudgetArray[i].newAmount;
       listTag.append(memberName);
       listTag.append(memberBudget);
       listTag.append(memberState);
@@ -433,29 +436,29 @@ class Budget {
       newAmount: budgetAmount,
     };
     // میخوایم بررسی کنیم آیا خانوار از قبل بودجه ای داشته یا خیر ؟
-//  یک متغییر میسازیم که درون آن آرایه بودجه خانوار را بگیرد و 
-//   آرایه ای از اسامی اشخاصی که بودجه ثبت کردن ایجاد کند 
+    //  یک متغییر میسازیم که درون آن آرایه بودجه خانوار را بگیرد و
+    //   آرایه ای از اسامی اشخاصی که بودجه ثبت کردن ایجاد کند
     const users = new Map(memberBudgetArray.map((e) => [e.memberName, e]));
     console.log(users);
-    // اگر شخص مورد نظر ما در آرایه بالا نبود 
+    // اگر شخص مورد نظر ما در آرایه بالا نبود
     if (!users.has(member.memberName)) {
-      // آبجکت شخص را به آرایه بودجه خانوار اضافه کن 
+      // آبجکت شخص را به آرایه بودجه خانوار اضافه کن
       memberBudgetArray.push(member);
-      // آرایه بودجه خانوار را به لوکال استورج اضافه کن 
+      // آرایه بودجه خانوار را به لوکال استورج اضافه کن
       localStorage.setItem("memberBudget", JSON.stringify(memberBudgetArray));
     } else {
-      //   اگر شخص از قبل بودجه داشته ایندکس آرایه آن را پیدا کن  
+      //   اگر شخص از قبل بودجه داشته ایندکس آرایه آن را پیدا کن
       //Find index of specific object using findIndex method.
       let objIndex = memberBudgetArray.findIndex(
           (obj) => obj.memberName == member.memberName
         ),
-        // بر اساس ایندکس بالا مقدار بودجه شخص مورد نظر را بگیر 
+        // بر اساس ایندکس بالا مقدار بودجه شخص مورد نظر را بگیر
         storedBudget = memberBudgetArray[objIndex].newAmount,
-        // آن را با مقدار جدید جمع بزن 
+        // آن را با مقدار جدید جمع بزن
         sumNewAmount = storedBudget + member.newAmount;
       storedBudget = sumNewAmount;
       // حال میخوایم آبجکتی بسازیم که جایگزین آبجکت قبلی شود
-      //   یک آرایه از آبجکت جدید با مقدار جدید بساز  
+      //   یک آرایه از آبجکت جدید با مقدار جدید بساز
       let newArrForObj = [
           {
             memberName: getHousehold.value,
@@ -468,7 +471,7 @@ class Budget {
             newArrForObj.find((o) => o.memberName === obj.memberName) || obj
         );
       console.log(replacingObj);
-//  آرایه جایگزین را به لوکال استورج بفرست
+      //  آرایه جایگزین را به لوکال استورج بفرست
       localStorage.setItem("memberBudget", JSON.stringify(replacingObj));
     }
   }
@@ -509,7 +512,7 @@ class Expense {
     };
       exArray.forEach(function(userData, index){
       console.log("[" + index + "]: " + userData)
-    };
+      });
     // localStorage.setItem("ex", JSON.stringify(userData));
     // let stored = JSON.parse(localStorage.getItem("ex"));
     // console.log(userData);
