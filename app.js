@@ -44,7 +44,6 @@ let destination = document.querySelector("#destination"),
   //  categories and expenses
   addCostRegBtn = document.querySelectorAll('.addCostReg'),
   categoryCost = document.querySelector('#expenseCat'),
-  // categoryCost2 = categoryCost.getElementsByTagName('button'),
   categoryCost2 = document.querySelectorAll('.categoryBtn'),
   backBtn = document.querySelectorAll('.backHome'),
   categoryDiv = document.querySelectorAll('.category'),
@@ -64,6 +63,7 @@ let destination = document.querySelector("#destination"),
   transportTitle = document.querySelector("#transportTitle"),
   roomTitle = document.querySelector("#roomTitle"),
   otherTitle = document.querySelector("#otherTitle"),
+  condition = document.querySelector("#condition"),
   categoryCostChildCount = categoryCost2.length;
 
 // add this functionality to NodeList for we can add event handler for nodelist
@@ -101,31 +101,31 @@ document.addEventListener("DOMContentLoaded", function () {
 document.querySelector("#foodBtn").addEventListener("click" , function(e){
   new UserInterface().foodCategory();
   e.preventDefault()
-})
+});
 document.querySelector("#foodSub").addEventListener("click" , function(e){
   new Expense().food()
   e.preventDefault()
-})
+});
 // ent display
 document.querySelector("#entBtn").addEventListener("click" , function(e){
   new UserInterface().entCategory();
   e.preventDefault();
-})
+});
 // transport display
 document.querySelector("#transportBtn").addEventListener('click', function(e){
   new UserInterface().transportCategory();
   e.preventDefault();
-})
+});
 // room display
 document.querySelector("#roomBtn").addEventListener("click" , function(e){
   new UserInterface().roomCategory();
   e.preventDefault();
-})
+});
 // other display
 document.querySelector("#othersBtn").addEventListener("click" , function(e){
   new UserInterface().otherCategory();
   e.preventDefault();
-})
+});
 // createTravel
 createTravelBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -158,13 +158,19 @@ createNewHousehold.addEventListener("click", function () {
 submitHousehold.addEventListener("submit", function(e){
   e.preventDefault();
   new Household().createMember();
-})
+});
 
 backBtn.addEventListener("click", function () {
   for(i = 0 ; i<categoryDiv.length ; i++){
     categoryDiv[i].style.display = 'none';
     travelManagement.style.display = 'flex';
   }
+});
+condition.addEventListener("click" , function(){
+    // example.style.display = "flex";
+    // travelManagement.style.display = "none";
+    let householdSelected = household.options[household.selectedIndex].value;
+    new Household().condition(householdSelected)
 });
 
 class UserInterface {
@@ -190,35 +196,35 @@ class UserInterface {
   }
   foodCategory(){
     // food category diplay
-    if(foodCat.style.display != "ex"){
+    if(foodCat.style.display == ""){
       foodCat.style.display = 'flex';
       travelManagement.style.display = "none";
     }
   }
   entCategory(){
     // ent category display
-    if(entCat.style.display != "ex"){
+    if(entCat.style.display == ""){
       entCat.style.display = 'flex';
       travelManagement.style.display = "none";
     }
   }
   transportCategory(){
     // transport category display
-    if(transportCat.style.display != "ex"){
+    if(transportCat.style.display == ""){
       transportCat.style.display = 'flex';
       travelManagement.style.display = "none";
     }
   }
   roomCategory(){
     // room category display
-    if(roomCat.style.display != "ex"){
+    if(roomCat.style.display == ""){
       roomCat.style.display = 'flex';
       travelManagement.style.display = "none";
     }
   }
   otherCategory(){
     // other category display
-    if(otherCat.style.display != "ex"){
+    if(otherCat.style.display == ""){
       otherCat.style.display = 'flex';
       travelManagement.style.display = "none";
     }
@@ -382,6 +388,10 @@ class Household {
     
 
 
+  }
+  // household Condition 
+  condition(household){
+    
   }
   
 }
