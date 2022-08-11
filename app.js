@@ -424,43 +424,50 @@ class Budget {
     localStorage.setItem("totalBudget", totalBudget);
     return totalBudget;
   }
+  // برای محاسبه بودجه به ازای هر شخص
   memberBudget(budgetAmount) {
+    // آبجکتی از مقدار های ثبت شده توسط کاربر می سازیم
     let member = {
       memberName: getHousehold.value,
       newAmount: budgetAmount,
     };
-
+    // میخوایم بررسی کنیم آیا خانوار از قبل بودجه ای داشته یا خیر ؟
+//  یک متغییر میسازیم که درون آن آرایه بودجه خانوار را بگیرد و 
+//   آرایه ای از اسامی اشخاصی که بودجه ثبت کردن ایجاد کند 
     const users = new Map(memberBudgetArray.map((e) => [e.memberName, e]));
     console.log(users);
+    // اگر شخص مورد نظر ما در آرایه بالا نبود 
     if (!users.has(member.memberName)) {
+      // آبجکت شخص را به آرایه بودجه خانوار اضافه کن 
       memberBudgetArray.push(member);
+      // آرایه بودجه خانوار را به لوکال استورج اضافه کن 
       localStorage.setItem("memberBudget", JSON.stringify(memberBudgetArray));
     } else {
-      new UserInterface().displayErrorMsg(
-        `لطفا مقادیر را به درستی وارد کنید.`,
-        addToBudgetForm,
-        budgetFormChild
-      );
-      console.log(member.newAmount);
+      //   اگر شخص از قبل بودجه داشته ایندکس آرایه آن را پیدا کن  
       //Find index of specific object using findIndex method.
       let objIndex = memberBudgetArray.findIndex(
           (obj) => obj.memberName == member.memberName
         ),
+        // بر اساس ایندکس بالا مقدار بودجه شخص مورد نظر را بگیر 
         storedBudget = memberBudgetArray[objIndex].newAmount,
+        // آن را با مقدار جدید جمع بزن 
         sumNewAmount = storedBudget + member.newAmount;
       storedBudget = sumNewAmount;
+      // حال میخوایم آبجکتی بسازیم که جایگزین آبجکت قبلی شود
+      //   یک آرایه از آبجکت جدید با مقدار جدید بساز  
       let newArrForObj = [
           {
             memberName: getHousehold.value,
             newAmount: storedBudget,
           },
         ],
+        // آرایه ای بساز که دو آبجکت قبلی را ادغام کند
         replacingObj = memberBudgetArray.map(
           (obj) =>
             newArrForObj.find((o) => o.memberName === obj.memberName) || obj
         );
       console.log(replacingObj);
-
+//  آرایه جایگزین را به لوکال استورج بفرست
       localStorage.setItem("memberBudget", JSON.stringify(replacingObj));
     }
   }
