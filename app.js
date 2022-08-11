@@ -26,6 +26,7 @@ let destination = document.querySelector("#destination"),
   addToBudget = document.querySelector("#addToBudget"),
   newWalletAmount = document.querySelector("#newWallet"),
   householdBudgetForm = document.querySelector("#householdBudgetForm"),
+  budgetFormChild = document.querySelector("#addToBudgetForm label"),
 // to select delete button
   delBtn = document.querySelector("#delBtn"),
   // to select categories of household 
@@ -408,7 +409,7 @@ class Budget {
   // adding to wallet
   addToWallet() {
     if (typeof newWalletAmount.value == "number" || !newWalletAmount.value || !getHousehold.value) {
-      const budgetFormChild = document.querySelector("#addToBudgetForm label");
+      
       new UserInterface().displayErrorMsg(
         `لطفا مقادیر را به درستی وارد کنید.`,
         addToBudgetForm,
@@ -434,19 +435,31 @@ class Budget {
       memberName : getHousehold.value,
       newAmount : budgetAmount   
     } ;
-    console.log(member.memberName);
-    if ( memberBudgetArray.includes(member.memberName)){
-      console.log("true");
-    } else{
+
+    const users = new Map( memberBudgetArray.map( e => [e.memberName, e] ) );
+    console.log(users);
+    if(!users.has(member.memberName)){
       memberBudgetArray.push(member);
       localStorage.setItem("memberBudget", JSON.stringify(memberBudgetArray))
+      
+    } else {
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
+        addToBudgetForm,
+        budgetFormChild
+      );
+      console.log(member.newAmount);
+      new Budget().addToMemberBudget()
     }
-   
-    new Budget().addToMemberBudget(member, budgetAmount)
+     
+    
   }
-  addToMemberBudget(memberName,memberBudget){
-
+  addToMemberBudget(){
+    // memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget"))
+    // let HouseholdBudget = memberBudgetArray;
+    // console.log(HouseholdBudget);
   }
+  
 }
 class Expense {
   constructor(){}
