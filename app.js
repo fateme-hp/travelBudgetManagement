@@ -29,6 +29,8 @@ let destination = document.querySelector("#destination"),
   budgetFormChild = document.querySelector("#addToBudgetForm label"),
   // to select delete button
   delBtn = document.querySelector("#delBtn"),
+  // to select condition button
+  condBtn = document.querySelector("#condition");
   // to select categories of household
   getFoodHousehold = document.querySelector("#getFoodHousehold"),
   getEntHousehold = document.querySelector("#getEntHousehold"),
@@ -234,6 +236,11 @@ condition.addEventListener("click", function () {
   new Household().condition(householdSelected);
 });
 
+condBtn.addEventListener("click", function(){
+  let householdConditionSelected = household.options[household.selectedIndex].value;
+  new UserInterface().householdCondition(householdConditionSelected);
+})
+
 // class
 //  interface display
 class UserInterface {
@@ -300,6 +307,31 @@ class UserInterface {
     liSpan.forEach(element => {
       element.remove();
     });
+  }
+
+  householdCondition(conditionMember){
+    let userSelected = conditionMember;
+    for(let i=0;i<householdArray.length;i++){
+      console.log('object');
+      const orderList = document.querySelector("#memberOfHousehold ol");
+      const listTag = document.createElement("li"),
+      memberName = document.createElement("span"),
+      memberBudget = document.createElement("span"),
+      memberState = document.createElement("span");
+      orderList.appendChild(listTag);
+      listTag.classList.add("member");
+      memberState.classList.add("memberState");
+      memberBudget.classList.add("memberBudget");
+      memberName.classList.add("memberName");
+      memberName.innerText = householdArray[i];
+      memberBudget.innerText = memberBudgetArray[i].newAmount;
+      memberState.innerText = householdState;
+      listTag.append(memberName);
+      listTag.append(memberBudget);
+      listTag.append(memberState);
+    }
+
+    console.log(userSelected);
   }
 }
 

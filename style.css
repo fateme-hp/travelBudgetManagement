@@ -282,3 +282,18 @@ margin-top:10px;
 #BtnCreateHousehold button{
   padding: 7px 9px;
 }
+#condition {
+  
+  display: flex;
+
+}
+#condition span{
+  margin-right: 20px;
+  width:150px;
+}
+#condition ol{
+ padding: 15px;
+}
+#condition li{
+  display: flex;
+}
