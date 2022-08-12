@@ -72,7 +72,7 @@ let destination = document.querySelector("#destination"),
   roomSub = document.querySelector("#roomSub"),
   otherSub = document.querySelector("#otherSub"),
   exArray = JSON.parse(localStorage.getItem("exArray") || "[]");
-  categoryCostChildCount = categoryCost2.length;
+categoryCostChildCount = categoryCost2.length;
 
 // add this functionality to NodeList for we can add event handler for nodelist
 NodeList.prototype.addEventListener = function (
@@ -84,8 +84,15 @@ NodeList.prototype.addEventListener = function (
     this[i].addEventListener(event_name, callback, useCapture);
   }
 };
+
 // eventListeners
+
 // check if travel exist
+// check Travel array length if it's more than 0
+// that means travel exist => show travel management
+// and add travel info from local storage
+// if travel array length is 0
+// create new Travel => show create travel
 document.addEventListener("DOMContentLoaded", function () {
   if (travelArray.length === 0) {
     createTravel.style.display = "flex";
@@ -107,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Household().addMemberOfOthersCat();
   }
 });
+
 // food display
 document.querySelector("#foodBtn").addEventListener("click", function (e) {
   new UserInterface().foodCategory();
@@ -132,6 +140,31 @@ document.querySelector("#othersBtn").addEventListener("click", function (e) {
   new UserInterface().otherCategory();
   e.preventDefault();
 });
+foodSub.addEventListener("click", function (e) {
+  e.preventDefault();
+  new Expense().food();
+});
+
+entertainmentSub.addEventListener("click", function (e) {
+  e.preventDefault();
+  new Expense().enertainment();
+});
+
+transportSub.addEventListener("click", function (e) {
+  e.preventDefault();
+  new Expense().transport();
+});
+
+roomSub.addEventListener("click", function (e) {
+  e.preventDefault();
+  new Expense().room();
+});
+
+otherSub.addEventListener("click", function (e) {
+  e.preventDefault();
+  new Expense().other();
+});
+
 // createTravel
 createTravelBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -144,28 +177,34 @@ createMemberBtn.addEventListener("submit", function (e) {
 
   new Household().createMember();
 });
-
+// show add budget input
 addToBudget.addEventListener("click", function () {
   new Budget().addToBudget();
 });
+// add budget to wallet
 addToBudgetBtn.addEventListener("click", function () {
   new Budget().addToWallet();
 });
+
+// delete travel
 delBtn.addEventListener("click", function () {
   window.localStorage.clear();
   location.reload();
   // createTravel.style.display = "flex";
   // travelManagement.style.display = "none";
 });
+
+//  show household form
 createNewHousehold.addEventListener("click", function () {
   travelManagement.style.display = "none";
   createHousehold.style.display = "flex";
 });
+//  add new household
 submitHousehold.addEventListener("submit", function (e) {
   e.preventDefault();
   new Household().createMember();
 });
-
+//  go back button
 backBtn.addEventListener("click", function () {
   for (i = 0; i < categoryDiv.length; i++) {
     categoryDiv[i].style.display = "none";
@@ -179,6 +218,8 @@ condition.addEventListener("click", function () {
   new Household().condition(householdSelected);
 });
 
+// class
+//  interface display
 class UserInterface {
   constructor() {}
 
@@ -196,6 +237,8 @@ class UserInterface {
       MessageBox.remove();
     }, 6000);
   }
+
+  //  show travel management on load
   showManagement() {
     createTravel.style.display = "none";
     travelManagement.style.display = "flex";
@@ -236,11 +279,16 @@ class UserInterface {
     }
   }
 }
+
 class Travel {
   constructor() {}
 
   // methods
-  // method create travel
+  // create travel  method
+  // check if all the fields are filled
+  //  if there is an empty field => show error message
+  //  if all the fields are filled => add data to travel data
+  //  and show travel management
   createTravel() {
     if (
       !desc.value ||
@@ -279,8 +327,8 @@ class Household {
   constructor() {}
 
   // methods
-  // method create member
-
+  //  create member method
+  //  check local storage and add household to household select input
   addMemberOfHousehold() {
     for (let i = 0; i < householdArray.length; i++) {
       const tag = document.createElement("option");
@@ -288,13 +336,11 @@ class Household {
       tag.innerText = householdArray[i];
       getHousehold.appendChild(tag);
 
-      
-
-      const listTag = document.createElement("li"),
-      memberName = document.createElement("span"),
-      memberBudget = document.createElement("span"),
-      memberState = document.createElement("span");
       const orderList = document.querySelector("#memberOfHousehold ol");
+      const listTag = document.createElement("li"),
+        memberName = document.createElement("span"),
+        memberBudget = document.createElement("span"),
+        memberState = document.createElement("span");
       orderList.appendChild(listTag);
       listTag.classList.add("member");
       memberState.classList.add("memberState");
@@ -307,6 +353,7 @@ class Household {
       listTag.append(memberState);
     }
   }
+  //  household Of food category
   addMemberOfFoodCat() {
     for (let i = 0; i < householdArray.length; i++) {
       const tag = document.createElement("option");
@@ -315,6 +362,7 @@ class Household {
       getFoodHousehold.appendChild(tag);
     }
   }
+  //  household Of food category
   addMemberOfEntCat() {
     for (let i = 0; i < householdArray.length; i++) {
       const tag = document.createElement("option");
@@ -323,6 +371,8 @@ class Household {
       getEntHousehold.appendChild(tag);
     }
   }
+
+  //  household Of food category
   addMemberOfTransportCat() {
     for (let i = 0; i < householdArray.length; i++) {
       const tag = document.createElement("option");
@@ -331,6 +381,7 @@ class Household {
       getTransportHousehold.appendChild(tag);
     }
   }
+  //  household Of food category
   addMemberOfRoomCat() {
     for (let i = 0; i < householdArray.length; i++) {
       const tag = document.createElement("option");
@@ -339,6 +390,7 @@ class Household {
       getRoomHousehold.appendChild(tag);
     }
   }
+  //  household Of food category
   addMemberOfOthersCat() {
     for (let i = 0; i < householdArray.length; i++) {
       const tag = document.createElement("option");
@@ -348,11 +400,16 @@ class Household {
     }
   }
 
+  // create household Method
+  // read value from form
+  // check if value of fields exist
+  // if there isn't any => show error message
+  // else check if the member exist
+  // if household exist => show error message
+  // else add household to local storage and household select input
   createMember() {
-    // read value from form
     let fullName = memberName.value;
 
-    // check the value of fields are correct
     if (fullName === "") {
       new UserInterface().displayErrorMsg(
         `  لطفا همه ی فیلد ها را پر کنید. `,
@@ -379,14 +436,11 @@ class Household {
           localStorage.setItem("household", JSON.stringify(householdArray));
 
           new Household().addMemberOfHousehold(getHousehold);
-          // new Household().householdBudgetState();
         }
       }
     }
   }
 
-  // household budget state
-  householdBudgetState() {}
   // household Condition
   condition(household) {}
 }
@@ -399,6 +453,9 @@ class Budget {
     addToBudget.disabled = true;
   }
   // adding to wallet
+  // check if fields are filled correctly
+  // if there is a problem => show error message
+  // else add amount to total budget & household budget
   addToWallet() {
     if (
       typeof newWalletAmount.value == "number" ||
@@ -414,17 +471,20 @@ class Budget {
       const newAmount = Number(newWalletAmount.value);
       new Budget().memberBudget(newAmount);
       new Budget().budgetAmount(newAmount);
-      newWalletAmount.value = "";
+      newWalletAmount.innerText = "";
       addToBudget.disabled = false;
       addToBudgetForm.style.display = "none";
     }
   }
+
   // total budget
+  //  get new budget amount and add it to total budget
   budgetAmount(budget) {
     totalBudget = Number(totalBudget) + budget;
     localStorage.setItem("totalBudget", totalBudget);
     return totalBudget;
   }
+
   // برای محاسبه بودجه به ازای هر شخص
   memberBudget(budgetAmount) {
     // آبجکتی از مقدار های ثبت شده توسط کاربر می سازیم
@@ -474,49 +534,25 @@ class Budget {
   }
 }
 
-foodSub.addEventListener("click", function (e) {
-  e.preventDefault();
-  new Expense().food();
-});
-
-entertainmentSub.addEventListener("click", function (e) {
-  e.preventDefault();
-  new Expense().enertainment();
-});
-
-transportSub.addEventListener("click", function (e) {
-  e.preventDefault();
-  new Expense().transport();
-});
-
-roomSub.addEventListener("click", function (e) {
-  e.preventDefault();
-  new Expense().room();
-});
-
-otherSub.addEventListener("click", function (e) {
-  e.preventDefault();
-  new Expense().other();
-});
 class Expense {
   constructor() {}
   addExpense(household, title, price, category) {
     let userData = {
-      Household : household,
-      Title : title,
-      Price : price,
-      Category : category
+      Household: household,
+      Title: title,
+      Price: price,
+      Category: category,
     };
     exArray.push(userData);
     console.log(exArray);
-    localStorage.setItem("exArray" , JSON.stringify(exArray))
+    localStorage.setItem("exArray", JSON.stringify(exArray));
     console.log(exArray);
-    new Expense().expenseAmount(price)
+    new Expense().expenseAmount(price);
   }
-  expenseAmount(price){
+  expenseAmount(price) {
     totalExpense = Number(totalExpense) + price;
-    localStorage.setItem("totalExpense" , totalExpense);
-      return totalExpense;
+    localStorage.setItem("totalExpense", totalExpense);
+    return totalExpense;
   }
 
   food() {
