@@ -67,6 +67,12 @@ button:disabled{
   color: #004fcf;
   border: 2px solid #2c7dff;
 }
+.green {
+  color: #02a71e;
+}
+.red{
+  color: #ff0022;
+}
 
 /* step1 */
 #createTravel {

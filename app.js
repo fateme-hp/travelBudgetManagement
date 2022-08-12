@@ -334,6 +334,16 @@ class Household {
   //  check local storage and add household to household select input
   addMemberOfHousehold() {
     for (let i = 0; i < householdArray.length; i++) {
+      let filterArray = exArray.filter((e) => {
+          return e.Household === householdArray[i];
+        }),
+        priceArray = filterArray.map((e) => e.Price),
+        householdPriceSum = priceArray.reduce(
+          (accumulator, current) => accumulator + Number(current),
+          0
+        ),
+        householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum;
+
       const tag = document.createElement("option");
       tag.value = householdArray[i];
       tag.innerText = householdArray[i];
@@ -351,9 +361,16 @@ class Household {
       memberName.classList.add("memberName");
       memberName.innerText = householdArray[i];
       memberBudget.innerText = memberBudgetArray[i].newAmount;
+      memberState.innerText = householdState;
       listTag.append(memberName);
       listTag.append(memberBudget);
       listTag.append(memberState);
+
+      if(householdState > 0){
+        memberState.classList.add("green");
+      } else if(householdState < 0){
+        memberState.classList.add("red");
+      }
     }
   }
   //  household Of food category
@@ -446,7 +463,7 @@ class Household {
             "memberBudget",
             JSON.stringify(memberBudgetArray)
           );
-          
+
           new Household().addMemberOfHousehold(getHousehold);
         }
       }
@@ -546,7 +563,12 @@ class Budget {
   }
 
   // household budget state
-  householdBudgetState() {}
+  // householdBudgetState() {
+
+  //   for (let i = 0; i < householdArray.length; i++) {
+
+  //   }
+  // }
 }
 
 class Expense {
@@ -569,48 +591,47 @@ class Expense {
     localStorage.setItem("totalExpense", totalExpense);
     return totalExpense;
   }
-  memberExpense(price,household,category){
+  memberExpense(price, household, category) {
     console.log(householdArray[0]);
     let members = [];
-      let usersName = {
-        household:household,
-        price : price,
-        category : category
-
-      };
-      members.push(usersName)
-      console.log(members);
+    let usersName = {
+      household: household,
+      price: price,
+      category: category,
+    };
+    members.push(usersName);
+    console.log(members);
     // let user = [[{name:ali,price:20}],[{name:mmd,price:30}]];
     // memberExpenseArray.push(user);
   }
-  
+
   food() {
     if (
       typeof foodCost.value == "number" ||
       !foodCost.value ||
       getFoodHousehold.value == "" ||
       foodTitle.value == ""
-      ) {
-        let parent = document.querySelector("#food"),
+    ) {
+      let parent = document.querySelector("#food"),
         child = document.querySelector("#food label");
-        new UserInterface().displayErrorMsg(
-          `لطفا مقادیر را به درستی وارد کنید.`,
-          parent,
-          child
-          );
-        } else {
-          const newExpense = Number(foodCost.value);
-          const householdNewEx = getFoodHousehold.value;
-          const householdNewExTitle = foodTitle.value;
-          console.log(typeof householdNewExTitle);
-          const category = foodCat.id;
-          new Expense().addExpense(
-            householdNewEx,
-            householdNewExTitle,
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
+        parent,
+        child
+      );
+    } else {
+      const newExpense = Number(foodCost.value);
+      const householdNewEx = getFoodHousehold.value;
+      const householdNewExTitle = foodTitle.value;
+      console.log(typeof householdNewExTitle);
+      const category = foodCat.id;
+      new Expense().addExpense(
+        householdNewEx,
+        householdNewExTitle,
         newExpense,
         category
-        );
-        new Expense().memberExpense(newExpense,householdNewEx,category)
+      );
+      new Expense().memberExpense(newExpense, householdNewEx, category);
     }
   }
   enertainment() {
