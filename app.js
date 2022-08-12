@@ -563,46 +563,54 @@ class Expense {
     localStorage.setItem("exArray", JSON.stringify(exArray));
     console.log(exArray);
     new Expense().expenseAmount(price);
-    new Expense().memberExpense(price);
   }
   expenseAmount(price) {
     totalExpense = Number(totalExpense) + price;
     localStorage.setItem("totalExpense", totalExpense);
     return totalExpense;
   }
-  memberExpense(price) {
-    console.log(price);
-    let user = ["ali"];
-    memberExpenseArray.push(user);
-    console.log(memberExpenseArray.push(user));
-  }
+  memberExpense(price,household,category){
+    console.log(householdArray[0]);
+    let members = [];
+      let usersName = {
+        household:household,
+        price : price,
+        category : category
 
+      };
+      members.push(usersName)
+      console.log(members);
+    // let user = [[{name:ali,price:20}],[{name:mmd,price:30}]];
+    // memberExpenseArray.push(user);
+  }
+  
   food() {
     if (
       typeof foodCost.value == "number" ||
       !foodCost.value ||
       getFoodHousehold.value == "" ||
       foodTitle.value == ""
-    ) {
-      let parent = document.querySelector("#food"),
+      ) {
+        let parent = document.querySelector("#food"),
         child = document.querySelector("#food label");
-      new UserInterface().displayErrorMsg(
-        `لطفا مقادیر را به درستی وارد کنید.`,
-        parent,
-        child
-      );
-    } else {
-      const newExpense = Number(foodCost.value);
-      const householdNewEx = getFoodHousehold.value;
-      const householdNewExTitle = foodTitle.value;
-      console.log(typeof householdNewExTitle);
-      const category = foodCat.id;
-      new Expense().addExpense(
-        householdNewEx,
-        householdNewExTitle,
+        new UserInterface().displayErrorMsg(
+          `لطفا مقادیر را به درستی وارد کنید.`,
+          parent,
+          child
+          );
+        } else {
+          const newExpense = Number(foodCost.value);
+          const householdNewEx = getFoodHousehold.value;
+          const householdNewExTitle = foodTitle.value;
+          console.log(typeof householdNewExTitle);
+          const category = foodCat.id;
+          new Expense().addExpense(
+            householdNewEx,
+            householdNewExTitle,
         newExpense,
         category
-      );
+        );
+        new Expense().memberExpense(newExpense,householdNewEx,category)
     }
   }
   enertainment() {
