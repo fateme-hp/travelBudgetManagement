@@ -42,6 +42,7 @@ let destination = document.querySelector("#destination"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
   memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
+  totalExpense = localStorage.getItem("totalExpense") || 0,
   //  categories and expenses
   addCostRegBtn = document.querySelectorAll(".addCostReg"),
   categoryCost = document.querySelector("#expenseCat"),
@@ -109,10 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // food display
 document.querySelector("#foodBtn").addEventListener("click", function (e) {
   new UserInterface().foodCategory();
-  e.preventDefault();
-});
-document.querySelector("#foodSub").addEventListener("click", function (e) {
-  new Expense().food();
   e.preventDefault();
 });
 // ent display
@@ -514,11 +511,12 @@ class Expense {
     console.log(exArray);
     localStorage.setItem("exArray" , JSON.stringify(exArray))
     console.log(exArray);
+    new Expense().expenseAmount(price)
   }
-  totalExpense(title,price,category){
-    let totalEx = {
-      
-    }
+  expenseAmount(price){
+    totalExpense = Number(totalExpense) + price;
+    localStorage.setItem("totalExpense" , totalExpense);
+      return totalExpense;
   }
 
   food() {
