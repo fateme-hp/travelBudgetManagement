@@ -230,7 +230,7 @@ margin-top:10px;
   border-radius: 5px;
   display: none;
 }
-#conditionDisplay {
+#conditionDisplay ,#createHousehold {
   margin: 3% ;
   padding: 20px;
   display: none;
@@ -240,15 +240,15 @@ margin-top:10px;
   border-radius: 5px;
   display: none;
 }
-.category form {
+.category form, #createHousehold form {
   display: flex;
   flex-direction: column;
   padding: 40px;
 }
-.category input {
+.category input, #createHousehold input{
   width: 200px;
 }
-.category * {
+.category *, #createHousehold * {
   margin-bottom: 10px;
 }
 
