@@ -624,26 +624,13 @@ class Expense {
     exArray.push(userData);
     localStorage.setItem("exArray", JSON.stringify(exArray));
     new Expense().expenseAmount(price);    
-    new Expense().memberExpense(userData)
-
   }
   expenseAmount(price) {
     totalExpense = Number(totalExpense) + price;
     localStorage.setItem("totalExpense", totalExpense);
     return totalExpense; 
   }
-  memberExpense(price, household, category) {
-    console.log(householdArray[0]);
-    let members = [];
-    let usersName = {
-      household: household,
-      price: price,
-      category: category,
-    };
-    members.push(usersName);
-    console.log(members);
-    // let user = [[{name:ali,price:20}],[{name:mmd,price:30}]];
-    // memberExpenseArray.push(user);
+  memberExpense() {
   }
 
   food() {
