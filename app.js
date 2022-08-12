@@ -41,7 +41,8 @@ let destination = document.querySelector("#destination"),
   travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
   memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
-  memberStateArray = JSON.parse(localStorage.getItem("memberState") || "[]"),
+  householdTotalExpense = JSON.parse("[]"),
+  memberStateArray = JSON.parse( "[]"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
   totalExpense = localStorage.getItem("totalExpense") || 0,
   memberExpenseArray = JSON.parse(
@@ -116,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Household().addMemberOfTransportCat();
     new Household().addMemberOfRoomCat();
     new Household().addMemberOfOthersCat();
+    new Budget().householdBudgetState();
   }
 });
 
@@ -343,13 +345,19 @@ class Household {
           (accumulator, current) => accumulator + Number(current),
           0
         ),
+        sumExpense ={
+          member: householdArray[i],
+          totalExpenseSum: householdPriceSum
+        },
         householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
         state ={
           member: householdArray[i],
           budgetState: householdState
         };
-        memberStateArray.push(state);
-        localStorage.setItem("memberState", JSON.stringify(memberStateArray));
+        // householdTotalExpense.push(sumExpense)
+        // memberStateArray.push(state);
+        // localStorage.setItem("householdTotalExpense", JSON.stringify(householdTotalExpense));
+        // localStorage.setItem("memberState", JSON.stringify(memberStateArray));
 
       const tag = document.createElement("option");
       tag.value = householdArray[i];
@@ -472,7 +480,8 @@ class Household {
           );
 
           new Household().addMemberOfHousehold(getHousehold);
-        }
+          // new Budget.householdBudgetState();
+       }
       }
     }
   }
@@ -570,12 +579,32 @@ class Budget {
   }
 
   // household budget state
-  // householdBudgetState() {
+  householdBudgetState() {
 
-  //   for (let i = 0; i < householdArray.length; i++) {
-
-  //   }
-  // }
+    for (let i = 0; i < householdArray.length; i++) {
+      let filterArray = exArray.filter((e) => {
+        return e.Household === householdArray[i];
+      }),
+      priceArray = filterArray.map((e) => e.Price),
+      householdPriceSum = priceArray.reduce(
+        (accumulator, current) => accumulator + Number(current),
+        0
+      ),
+      sumExpense ={
+        member: householdArray[i],
+        totalExpenseSum: householdPriceSum
+      },
+      householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
+      state ={
+        member: householdArray[i],
+        budgetState: householdState
+      };
+      householdTotalExpense.push(sumExpense)
+      memberStateArray.push(state);
+      localStorage.setItem("householdTotalExpense", JSON.stringify(householdTotalExpense));
+      localStorage.setItem("memberState", JSON.stringify(memberStateArray));
+    }
+  }
 }
 
 class Expense {
