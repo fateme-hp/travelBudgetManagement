@@ -42,6 +42,11 @@ let destination = document.querySelector("#destination"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
   memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
   householdTotalExpense = JSON.parse("[]"),
+  householdFoodExpense = JSON.parse("[]"),
+  householdEntExpense = JSON.parse("[]"),
+  householdTransportExpense = JSON.parse("[]"),
+  householdRoomExpense = JSON.parse("[]"),
+  householdOtherExpense = JSON.parse("[]"),
   memberStateArray = JSON.parse( "[]"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
   totalExpense = localStorage.getItem("totalExpense") || 0,
@@ -118,6 +123,11 @@ document.addEventListener("DOMContentLoaded", function () {
     new Household().addMemberOfRoomCat();
     new Household().addMemberOfOthersCat();
     new Budget().householdBudgetState();
+    new Expense().memberExpense(foodCat.id ,householdFoodExpense);
+    new Expense().memberExpense(entCat.id ,householdEntExpense);
+    new Expense().memberExpense(transportCat.id ,householdTransportExpense);
+    new Expense().memberExpense(roomCat.id ,householdRoomExpense);
+    new Expense().memberExpense(otherCat.id ,householdOtherExpense);
   }
 });
 
@@ -370,9 +380,9 @@ class Household {
 
       const orderList = document.querySelector("#memberOfHousehold ol");
       const listTag = document.createElement("li"),
-        memberName = document.createElement("span"),
-        memberBudget = document.createElement("span"),
-        memberState = document.createElement("span");
+      memberName = document.createElement("span"),
+      memberBudget = document.createElement("span"),
+      memberState = document.createElement("span");
       orderList.appendChild(listTag);
       listTag.classList.add("member");
       memberState.classList.add("memberState");
@@ -482,8 +492,8 @@ class Household {
             "memberBudget",
             JSON.stringify(memberBudgetArray)
           );
-          new UserInterface().removeHouseholdSpan();
           JSON.parse(localStorage.getItem("memberBudget"));
+          new UserInterface().removeHouseholdSpan();
           new Household().addMemberOfHousehold(getHousehold);
           
        }
@@ -524,6 +534,7 @@ class Budget {
       newWalletAmount.innerText = "";
       addToBudget.disabled = false;
       addToBudgetForm.style.display = "none";
+      location.reload()
     }
   }
 
@@ -630,7 +641,28 @@ class Expense {
     localStorage.setItem("totalExpense", totalExpense);
     return totalExpense; 
   }
-  memberExpense() {
+  memberExpense(category,categoryArray) {
+    for (let i = 0; i < householdArray.length; i++) {
+      let filterArray = exArray.filter((e) => {
+        return e.Household === householdArray[i];
+      }),
+      householdCat= filterArray.filter((e) => {
+        return e.Category === category;
+      }),
+      householdCatPrice = householdCat.map((e) => e.Price),
+      householdPriceSum = householdCatPrice.reduce(
+        (accumulator, current) => accumulator + Number(current),
+        0
+      ),
+      sumExpense ={
+        member: householdArray[i],
+        categoryName: category,
+        totalExpenseSum: householdPriceSum
+      };
+     
+      categoryArray.push(sumExpense);
+      localStorage.setItem(category, JSON.stringify(categoryArray));
+    }
   }
 
   food() {
