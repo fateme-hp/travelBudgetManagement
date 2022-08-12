@@ -41,6 +41,7 @@ let destination = document.querySelector("#destination"),
   travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
   householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
   memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
+  memberStateArray = JSON.parse(localStorage.getItem("memberState") || "[]"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
   totalExpense = localStorage.getItem("totalExpense") || 0,
   memberExpenseArray = JSON.parse(
@@ -342,7 +343,13 @@ class Household {
           (accumulator, current) => accumulator + Number(current),
           0
         ),
-        householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum;
+        householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
+        state ={
+          member: householdArray[i],
+          budgetState: householdState
+        };
+        memberStateArray.push(state);
+        localStorage.setItem("memberState", JSON.stringify(memberStateArray));
 
       const tag = document.createElement("option");
       tag.value = householdArray[i];
