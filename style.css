@@ -70,7 +70,15 @@ button:disabled{
 .green {
   color: #02a71e;
 }
+.green::after {
+  content: " بستانکار";
+  /* color: #02a71e; */
+}
 .red{
+  color: #ff0022;
+}
+.red::after{
+  content: " بدهکار";
   color: #ff0022;
 }
 
