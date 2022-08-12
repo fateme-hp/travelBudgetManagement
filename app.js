@@ -622,15 +622,15 @@ class Expense {
       Category: category,
     };
     exArray.push(userData);
-    console.log(exArray);
     localStorage.setItem("exArray", JSON.stringify(exArray));
-    console.log(exArray);
-    new Expense().expenseAmount(price);
+    new Expense().expenseAmount(price);    
+    new Expense().memberExpense(userData)
+
   }
   expenseAmount(price) {
     totalExpense = Number(totalExpense) + price;
     localStorage.setItem("totalExpense", totalExpense);
-    return totalExpense;
+    return totalExpense; 
   }
   memberExpense(price, household, category) {
     console.log(householdArray[0]);
@@ -681,40 +681,40 @@ class Expense {
       !entertainmentCost.value ||
       getEntHousehold.value == "" ||
       entertainmentTitle.value == ""
-    ) {
-      let parent = document.querySelector("#entertainment"),
+      ) {
+        let parent = document.querySelector("#entertainment"),
         child = document.querySelector("#entertainment label");
-      new UserInterface().displayErrorMsg(
-        `لطفا مقادیر را به درستی وارد کنید.`,
-        parent,
-        child
-      );
-    } else {
-      const newExpense = Number(entertainmentCost.value);
-      const householdNewEx = getEntHousehold.value;
-      const householdNewExTitle = entertainmentTitle.value;
-      const category = entCat.id;
-      new Expense().addExpense(
-        householdNewEx,
+        new UserInterface().displayErrorMsg(
+          `لطفا مقادیر را به درستی وارد کنید.`,
+          parent,
+          child
+          );
+        } else {
+          const newExpense = Number(entertainmentCost.value);
+          const householdNewEx = getEntHousehold.value;
+          const householdNewExTitle = entertainmentTitle.value;
+          const category = entCat.id;
+          new Expense().addExpense(
+            householdNewEx,
         householdNewExTitle,
         newExpense,
         category
-      );
+        );
+      }
     }
-  }
-  transport() {
-    if (
-      typeof transportCost.value == "number" ||
-      !transportCost.value ||
-      getTransportHousehold.value == "" ||
-      transportTitle.value == ""
-    ) {
-      let parent = document.querySelector("#transport"),
-        child = document.querySelector("#transport label");
-      new UserInterface().displayErrorMsg(
-        `لطفا مقادیر را به درستی وارد کنید.`,
-        parent,
-        child
+    transport() {
+      if (
+        typeof transportCost.value == "number" ||
+        !transportCost.value ||
+        getTransportHousehold.value == "" ||
+        transportTitle.value == ""
+        ) {
+          let parent = document.querySelector("#transport"),
+          child = document.querySelector("#transport label");
+          new UserInterface().displayErrorMsg(
+            `لطفا مقادیر را به درستی وارد کنید.`,
+            parent,
+            child
       );
     } else {
       const newExpense = Number(transportCost.value);
@@ -726,26 +726,26 @@ class Expense {
         householdNewExTitle,
         newExpense,
         category
-      );
+        );
+      }
     }
-  }
-  room() {
-    if (
-      typeof roomCost.value == "number" ||
-      !roomCost.value ||
-      getRoomHousehold.value == "" ||
-      roomTitle.value == ""
-    ) {
-      let parent = document.querySelector("#room"),
-        child = document.querySelector("#room label");
-      new UserInterface().displayErrorMsg(
-        `لطفا مقادیر را به درستی وارد کنید.`,
+    room() {
+      if (
+        typeof roomCost.value == "number" ||
+        !roomCost.value ||
+        getRoomHousehold.value == "" ||
+        roomTitle.value == ""
+        ) {
+          let parent = document.querySelector("#room"),
+          child = document.querySelector("#room label");
+          new UserInterface().displayErrorMsg(
+            `لطفا مقادیر را به درستی وارد کنید.`,
         parent,
         child
-      );
-    } else {
-      const newExpense = Number(roomCost.value);
-      const householdNewEx = getRoomHousehold.value;
+        );
+      } else {
+        const newExpense = Number(roomCost.value);
+        const householdNewEx = getRoomHousehold.value;
       const householdNewExTitle = roomTitle.value;
       const category = roomCat.id;
       new Expense().addExpense(
@@ -753,34 +753,34 @@ class Expense {
         householdNewExTitle,
         newExpense,
         category
-      );
+        );
+      }
     }
-  }
-  other() {
-    if (
+    other() {
+      if (
       typeof otherCost.value == "number" ||
       !otherCost.value ||
       getOtherHousehold.value == "" ||
       otherTitle.value == ""
-    ) {
-      let parent = document.querySelector("#food"),
+      ) {
+        let parent = document.querySelector("#food"),
         child = document.querySelector("#food label");
-      new UserInterface().displayErrorMsg(
-        `لطفا مقادیر را به درستی وارد کنید.`,
-        parent,
-        child
-      );
-    } else {
-      const newExpense = Number(otherCost.value);
-      const householdNewEx = getOtherHousehold.value;
-      const householdNewExTitle = otherTitle.value;
-      const category = otherCat.id;
-      new Expense().addExpense(
-        householdNewEx,
+        new UserInterface().displayErrorMsg(
+          `لطفا مقادیر را به درستی وارد کنید.`,
+          parent,
+          child
+          );
+        } else {
+          const newExpense = Number(otherCost.value);
+          const householdNewEx = getOtherHousehold.value;
+          const householdNewExTitle = otherTitle.value;
+          const category = otherCat.id;
+          new Expense().addExpense(
+            householdNewEx,
         householdNewExTitle,
         newExpense,
         category
-      );
+        );
+      }
     }
-  }
 }
