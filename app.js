@@ -284,6 +284,13 @@ class UserInterface {
       travelManagement.style.display = "none";
     }
   }
+
+  removeHouseholdSpan(){
+    let liSpan = document.querySelectorAll('.member');
+    liSpan.forEach(element => {
+      element.remove();
+    });
+  }
 }
 
 class Travel {
@@ -336,6 +343,7 @@ class Household {
   //  create member method
   //  check local storage and add household to household select input
   addMemberOfHousehold() {
+   
     for (let i = 0; i < householdArray.length; i++) {
       let filterArray = exArray.filter((e) => {
           return e.Household === householdArray[i];
@@ -354,10 +362,6 @@ class Household {
           member: householdArray[i],
           budgetState: householdState
         };
-        // householdTotalExpense.push(sumExpense)
-        // memberStateArray.push(state);
-        // localStorage.setItem("householdTotalExpense", JSON.stringify(householdTotalExpense));
-        // localStorage.setItem("memberState", JSON.stringify(memberStateArray));
 
       const tag = document.createElement("option");
       tag.value = householdArray[i];
@@ -478,9 +482,10 @@ class Household {
             "memberBudget",
             JSON.stringify(memberBudgetArray)
           );
-
+          new UserInterface().removeHouseholdSpan();
+          JSON.parse(localStorage.getItem("memberBudget"));
           new Household().addMemberOfHousehold(getHousehold);
-          // new Budget.householdBudgetState();
+          
        }
       }
     }
