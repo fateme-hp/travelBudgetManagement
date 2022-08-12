@@ -43,7 +43,9 @@ let destination = document.querySelector("#destination"),
   memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
   totalBudget = localStorage.getItem("totalBudget") || 0,
   totalExpense = localStorage.getItem("totalExpense") || 0,
-  memberExpenseArray = localStorage.JSON.parse(localStorage.getItem("memberExpenses") || "[]"),
+  memberExpenseArray = JSON.parse(
+    localStorage.getItem("memberExpenses") || "[]"
+  ),
   //  categories and expenses
   addCostRegBtn = document.querySelectorAll(".addCostReg"),
   categoryCost = document.querySelector("#expenseCat"),
@@ -435,7 +437,16 @@ class Household {
           householdArray.push(fullName);
           console.log(householdArray);
           localStorage.setItem("household", JSON.stringify(householdArray));
-
+          let member = {
+            memberName: fullName,
+            newAmount: 0,
+          };
+          memberBudgetArray.push(member);
+          localStorage.setItem(
+            "memberBudget",
+            JSON.stringify(memberBudgetArray)
+          );
+          
           new Household().addMemberOfHousehold(getHousehold);
         }
       }
@@ -533,6 +544,9 @@ class Budget {
       localStorage.setItem("memberBudget", JSON.stringify(replacingObj));
     }
   }
+
+  // household budget state
+  householdBudgetState() {}
 }
 
 class Expense {
@@ -549,14 +563,14 @@ class Expense {
     localStorage.setItem("exArray", JSON.stringify(exArray));
     console.log(exArray);
     new Expense().expenseAmount(price);
-    new Expense().memberExpense(price)
+    new Expense().memberExpense(price);
   }
   expenseAmount(price) {
     totalExpense = Number(totalExpense) + price;
     localStorage.setItem("totalExpense", totalExpense);
     return totalExpense;
   }
-  memberExpense(price){
+  memberExpense(price) {
     console.log(price);
     let user = ["ali"];
     memberExpenseArray.push(user);
