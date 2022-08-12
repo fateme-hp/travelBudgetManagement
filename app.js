@@ -77,7 +77,8 @@ let destination = document.querySelector("#destination"),
   transportTitle = document.querySelector("#transportTitle"),
   roomTitle = document.querySelector("#roomTitle"),
   otherTitle = document.querySelector("#otherTitle"),
-  condition = document.querySelector("#condition"),
+  condition = document.querySelector("#conditionDisplay"),
+  condBtn = document.querySelector("#condition"),
   foodSub = document.querySelector("#foodSub"),
   entertainmentSub = document.querySelector("#entertainmentSub"),
   transportSub = document.querySelector("#transportSub"),
@@ -239,6 +240,7 @@ condition.addEventListener("click", function () {
 condBtn.addEventListener("click", function(){
   let householdConditionSelected = household.options[household.selectedIndex].value;
   new UserInterface().householdCondition(householdConditionSelected);
+  condition.style.display ="flex";
 })
 
 // class
@@ -325,7 +327,7 @@ class UserInterface {
       memberName.classList.add("memberName");
       memberName.innerText = householdArray[i];
       memberBudget.innerText = memberBudgetArray[i].newAmount;
-      memberState.innerText = householdState;
+      // memberState.innerText = householdState;
       listTag.append(memberName);
       listTag.append(memberBudget);
       listTag.append(memberState);

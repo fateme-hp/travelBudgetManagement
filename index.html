@@ -62,7 +62,7 @@
             <input type="text"  id="newWallet">
             <button id="addToBudgetBtn" type="submit"> افزودن به کیف پول</button>
            </div>
-            <div>
+            <div id="btnforBudget">
               <button id="addToBudget">افزایش موجودی</button>
               <button id="condition">وضعیت</button>
               <button id="createNewHousehold">ایجاد خانوار جدید</button>
@@ -95,17 +95,6 @@
               <button id="foodSub"> ثبت هزینه</button>
               <button class="backHome">بازگشت</button>
             </form>
-
-            <div id="foodExpense" class="expense">
-              <h4></h4>
-                <div class="costs">
-                  <ol>
-                    <li></li>
-                  </ol>
-                  <span class="costSum" id="foodSum"></span>
-                </div>
-              
-            </div>
           </div>
 
       </div>
@@ -125,17 +114,6 @@
               <button id="entertainmentSub"  class="addCostReg"> ثبت هزینه</button>
               <button class="backHome">بازگشت</button>
             </form>
-
-            <div id="entExpense" class="expense">
-              <h4></h4>
-                <div class="costs">
-                  <ol>
-                    <li></li>
-                  </ol>
-                  <span class="costSum" id="entSum"></span>
-                </div>
-              
-            </div>
           </div>
       </div>
       <!-- transport -->
@@ -156,16 +134,6 @@
               <button class="backHome">بازگشت</button>
             </form>
 
-            <div id="trasportExpense" class="expense">
-              <h4></h4>
-                <div class="costs">
-                  <ol>
-                    <li></li>
-                  </ol>
-                  <span class="costSum" id="transportSum"></span>
-                </div>
-              
-            </div>
           </div>
       </div>
       <!-- room -->
@@ -185,16 +153,6 @@
               <button class="backHome">بازگشت</button>
             </form>
 
-            <div id="roomExpense" class="expense">
-              <h4></h4>
-                <div class="costs">
-                  <ol>
-                    <li></li>
-                  </ol>
-                  <span class="costSum" id="roomSum"></span>
-                </div>
-              
-            </div>
           </div>
       </div>
       <div id="othersCategory"  class="category">
@@ -213,16 +171,6 @@
               <button class="backHome">بازگشت</button>
             </form>
 
-            <div id="otherExpense" class="expense">
-              <h4></h4>
-                <div class="costs">
-                  <ol>
-                    <li></li>
-                  </ol>
-                  <span class="costSum" id="otherSum"></span>
-                </div>
-              
-            </div>
           </div>
       </div>
       <div id="createHousehold" class="category">
@@ -252,21 +200,10 @@
           </div>
         </div>
     </div>
-    <div id="condition" class="category">
+    <div id="conditionDisplay" >
       <h3>وضعیت هزینه شما </h3>
       <div id="">
-        <!-- <form action="" id="BtnCreateHousehold">
-          <label for="">نام خانوار: </label>
-          <input type="text" id="memberName">
-          <div>
-            <button type="submit" id="submitHousehold"> ثبت خانوار </button>
-          <button class="backHome" >بازگشت</button>
-          </div>
-        </form> -->
-
-        <div id="" >
-          
-            <div >
+ 
               <ol>
                 <li class="memberHeader">
                   <span > <b>غذا</b></span>
@@ -276,9 +213,7 @@
                   <span > <b>سایر</b></span>
                 </li>
               </ol>
-            </div>
-          
-        </div>
+         
       </div>
   </div>
     </div>
