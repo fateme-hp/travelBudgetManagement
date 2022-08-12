@@ -672,8 +672,7 @@ class Expense {
         newExpense,
         category
       );
-      new Expense().memberExpense(newExpense, householdNewEx, category);
-    }
+        }
   }
   enertainment() {
     if (
