@@ -317,7 +317,7 @@ margin-top:10px;
   display: none;
 
 }
-#conditionDisplay span{
+#conditionDisplay span , .catExpenseSum{
   margin-right: 20px;
   width:150px;
 }

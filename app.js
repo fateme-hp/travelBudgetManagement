@@ -31,60 +31,62 @@ let destination = document.querySelector("#destination"),
   delBtn = document.querySelector("#delBtn"),
   // to select condition button
   condBtn = document.querySelector("#condition");
-  // to select categories of household
-  getFoodHousehold = document.querySelector("#getFoodHousehold"),
-  getEntHousehold = document.querySelector("#getEntHousehold"),
-  getTransportHousehold = document.querySelector("#getTransportHousehold"),
-  getRoomHousehold = document.querySelector("#getRoomHousehold"),
-  getOtherHousehold = document.querySelector("#getOtherHousehold"),
-  memberOfHousehold = document.querySelector("#memberOfHousehold"),
+// to select categories of household
+(getFoodHousehold = document.querySelector("#getFoodHousehold")),
+  (getEntHousehold = document.querySelector("#getEntHousehold")),
+  (getTransportHousehold = document.querySelector("#getTransportHousehold")),
+  (getRoomHousehold = document.querySelector("#getRoomHousehold")),
+  (getOtherHousehold = document.querySelector("#getOtherHousehold")),
+  (memberOfHousehold = document.querySelector("#memberOfHousehold")),
   // local storage
   // local storage arrays
-  travelArray = JSON.parse(localStorage.getItem("travel") || "[]"),
-  householdArray = JSON.parse(localStorage.getItem("household") || "[]"),
-  memberBudgetArray = JSON.parse(localStorage.getItem("memberBudget") || "[]"),
-  householdTotalExpense = JSON.parse("[]"),
-  householdFoodExpense = JSON.parse("[]"),
-  householdEntExpense = JSON.parse("[]"),
-  householdTransportExpense = JSON.parse("[]"),
-  householdRoomExpense = JSON.parse("[]"),
-  householdOtherExpense = JSON.parse("[]"),
-  memberStateArray = JSON.parse( "[]"),
-  totalBudget = localStorage.getItem("totalBudget") || 0,
-  totalExpense = localStorage.getItem("totalExpense") || 0,
-  memberExpenseArray = JSON.parse(
+  (travelArray = JSON.parse(localStorage.getItem("travel") || "[]")),
+  (householdArray = JSON.parse(localStorage.getItem("household") || "[]")),
+  (memberBudgetArray = JSON.parse(
+    localStorage.getItem("memberBudget") || "[]"
+  )),
+  (householdTotalExpense = JSON.parse("[]")),
+  (householdFoodExpense = JSON.parse("[]")),
+  (householdEntExpense = JSON.parse("[]")),
+  (householdTransportExpense = JSON.parse("[]")),
+  (householdRoomExpense = JSON.parse("[]")),
+  (householdOtherExpense = JSON.parse("[]")),
+  (memberStateArray = JSON.parse("[]")),
+  (totalBudget = localStorage.getItem("totalBudget") || 0),
+  (totalExpense = localStorage.getItem("totalExpense") || 0),
+  (memberExpenseArray = JSON.parse(
     localStorage.getItem("memberExpenses") || "[]"
-  ),
+  )),
   //  categories and expenses
-  addCostRegBtn = document.querySelectorAll(".addCostReg"),
-  categoryCost = document.querySelector("#expenseCat"),
-  categoryCost2 = document.querySelectorAll(".categoryBtn"),
-  backBtn = document.querySelectorAll(".backHome"),
-  categoryDiv = document.querySelectorAll(".category"),
-  householdSelect = document.querySelectorAll(".household"),
-  foodCat = document.querySelector("#foodCategory"),
-  entCat = document.querySelector("#entCategory"),
-  transportCat = document.querySelector("#transportCategory"),
-  roomCat = document.querySelector("#roomCategory"),
-  otherCat = document.querySelector("#othersCategory"),
-  foodCost = document.querySelector("#foodCost"),
-  entertainmentCost = document.querySelector("#entertainmentCost"),
-  transportCost = document.querySelector("#transportCost"),
-  roomCost = document.querySelector("#roomCost"),
-  otherCost = document.querySelector("#otherCost"),
-  foodTitle = document.querySelector("#foodTitle"),
-  entertainmentTitle = document.querySelector("#entertainmentTitle"),
-  transportTitle = document.querySelector("#transportTitle"),
-  roomTitle = document.querySelector("#roomTitle"),
-  otherTitle = document.querySelector("#otherTitle"),
-  condition = document.querySelector("#conditionDisplay"),
-  condBtn = document.querySelector("#condition"),
-  foodSub = document.querySelector("#foodSub"),
-  entertainmentSub = document.querySelector("#entertainmentSub"),
-  transportSub = document.querySelector("#transportSub"),
-  roomSub = document.querySelector("#roomSub"),
-  otherSub = document.querySelector("#otherSub"),
-  exArray = JSON.parse(localStorage.getItem("exArray") || "[]");
+  (addCostRegBtn = document.querySelectorAll(".addCostReg")),
+  (categoryCost = document.querySelector("#expenseCat")),
+  (categoryCost2 = document.querySelectorAll(".categoryBtn")),
+  (backBtn = document.querySelectorAll(".backHome")),
+  (categoryDiv = document.querySelectorAll(".category")),
+  (householdSelect = document.querySelectorAll(".household")),
+  (foodCat = document.querySelector("#foodCategory")),
+  (entCat = document.querySelector("#entCategory")),
+  (transportCat = document.querySelector("#transportCategory")),
+  (roomCat = document.querySelector("#roomCategory")),
+  (otherCat = document.querySelector("#othersCategory")),
+  (foodCost = document.querySelector("#foodCost")),
+  (entertainmentCost = document.querySelector("#entertainmentCost")),
+  (transportCost = document.querySelector("#transportCost")),
+  (roomCost = document.querySelector("#roomCost")),
+  (otherCost = document.querySelector("#otherCost")),
+  (foodTitle = document.querySelector("#foodTitle")),
+  (entertainmentTitle = document.querySelector("#entertainmentTitle")),
+  (transportTitle = document.querySelector("#transportTitle")),
+  (roomTitle = document.querySelector("#roomTitle")),
+  (otherTitle = document.querySelector("#otherTitle")),
+  (condition = document.querySelector("#conditionDisplay")),
+  (condBtn = document.querySelector("#condition")),
+  (foodSub = document.querySelector("#foodSub")),
+  (entertainmentSub = document.querySelector("#entertainmentSub")),
+  (transportSub = document.querySelector("#transportSub")),
+  (roomSub = document.querySelector("#roomSub")),
+  (otherSub = document.querySelector("#otherSub")),
+  (exArray = JSON.parse(localStorage.getItem("exArray") || "[]"));
 categoryCostChildCount = categoryCost2.length;
 
 // add this functionality to NodeList for we can add event handler for nodelist
@@ -126,11 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
     new Household().addMemberOfRoomCat();
     new Household().addMemberOfOthersCat();
     new Budget().householdBudgetState();
-    new Expense().memberExpense(foodCat.id ,householdFoodExpense);
-    new Expense().memberExpense(entCat.id ,householdEntExpense);
-    new Expense().memberExpense(transportCat.id ,householdTransportExpense);
-    new Expense().memberExpense(roomCat.id ,householdRoomExpense);
-    new Expense().memberExpense(otherCat.id ,householdOtherExpense);
+    new Expense().memberExpense(foodCat.id, householdFoodExpense);
+    new Expense().memberExpense(entCat.id, householdEntExpense);
+    new Expense().memberExpense(transportCat.id, householdTransportExpense);
+    new Expense().memberExpense(roomCat.id, householdRoomExpense);
+    new Expense().memberExpense(otherCat.id, householdOtherExpense);
   }
 });
 
@@ -238,17 +240,38 @@ condition.addEventListener("click", function () {
   new Household().condition(householdSelected);
 });
 
-condBtn.addEventListener("click", function(e){
+condBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  let householdConditionSelected = household.options[household.selectedIndex].value;
-  new UserInterface().householdCondition(householdConditionSelected);
-  // new UserInterface().householdCondition(householdEntExpense);
-  // new UserInterface().householdCondition(householdTransportExpense);
-  // new UserInterface().householdCondition(householdRoomExpense);
-  // new UserInterface().householdCondition(householdOtherExpense);
-  
-  condition.style.display ="flex";
-})
+  let householdConditionSelected =
+    household.options[household.selectedIndex].value;
+  new UserInterface().householdCondition(
+    householdConditionSelected,
+    "foodCategory",
+    householdFoodExpense
+  );
+  new UserInterface().householdCondition(
+    householdConditionSelected,
+    "entCategory",
+    householdEntExpense
+  );
+  new UserInterface().householdCondition(
+    householdConditionSelected,
+    "transportCategory",
+    householdTransportExpense
+  );
+  new UserInterface().householdCondition(
+    householdConditionSelected,
+    "roomCategory",
+    householdRoomExpense
+  );
+  new UserInterface().householdCondition(
+    householdConditionSelected,
+    "otherCategory",
+    householdOtherExpense
+  );
+
+  condition.style.display = "flex";
+});
 
 // class
 //  interface display
@@ -311,89 +334,42 @@ class UserInterface {
     }
   }
 
-  removeHouseholdSpan(){
-    let liSpan = document.querySelectorAll('.member');
-    liSpan.forEach(element => {
+  removeHouseholdSpan() {
+    let liSpan = document.querySelectorAll(".member");
+    liSpan.forEach((element) => {
       element.remove();
     });
   }
 
-  householdCondition(household){
+  householdCondition(household, catName, catExpense) {
     console.log(household);
-    if (
-      !household
-    ) {
+    if (household === "") {
       new UserInterface().displayErrorMsg(
         `لطفا مقادیر را به درستی وارد کنید.`,
         addToBudgetForm,
         budgetFormChild
       );
     } else {
-      console.log(householdFoodExpense);
-      let filterArray = householdFoodExpense.filter((e) => {
-        return e.member === household;
-      }),
-      householdFoodCat= filterArray.filter((e) => {
-        return e.Category === "foodCategory";
-      }),
-      householdFoodCatPrice = householdFoodCat.map((e) => e.totalExpenseSum),
-      householdFoodPriceSum = householdFoodCatPrice.reduce(
-        (accumulator, current) => accumulator + Number(current),
-        0
-      );
-      // householdEntCat= filterArray.filter((e) => {
-      //   return e.Category === "entCategory";
-      // }),
-      // householdEntCatPrice = householdEntCat.map((e) => e.totalExpenseSum),
-      // householdEntPriceSum = householdEntCatPrice.reduce(
-      //   (accumulator, current) => accumulator + Number(current),
-      //   0
-      // ),
-      // householdTransportCat= filterArray.filter((e) => {
-      //   return e.Category === "transportCategory";
-      // }),
-      // householdTransportCatPrice = householdTransportCat.map((e) => e.totalExpenseSum),
-      // householdTransportPriceSum = householdTransportCatPrice.reduce(
-      //   (accumulator, current) => accumulator + Number(current),
-      //   0
-      // ),
-      // householdRoomCat= filterArray.filter((e) => {
-      //   return e.Category === "roomCategory";
-      // }),
-      // householdRoomCatPrice = householdRoomCat.map((e) => e.totalExpenseSum),
-      // householdRoomPriceSum = householdRoomCatPrice.reduce(
-      //   (accumulator, current) => accumulator + Number(current),
-      //   0
-      // ),
-      // householdOtherCat= filterArray.filter((e) => {
-      //   return e.Category === "otherCategory";
-      // }),
-      // householdOtherCatPrice = householdOtherCat.map((e) => e.totalExpenseSum),
-      // householdOtherPriceSum = householdOtherCatPrice.reduce(
-      //   (accumulator, current) => accumulator + Number(current),
-      //   0
-      // );
+      let filterArray = catExpense.filter((e) => {
+          return e.member === household;
+        }),
+        householdCat = filterArray.filter((e) => {
+          return e.categoryName === catName;
+        }),
+        householdCatPrice = householdCat.map((e) => e.totalExpenseSum),
+        householdPriceSum = householdCatPrice.reduce(
+          (accumulator, current) => accumulator + Number(current),
+          0
+        );
+
       const orderList = document.querySelector("#householdSum ol");
       const listTag = document.createElement("li"),
-      memberFood = document.createElement("span");
-      // memberEnt = document.createElement("span"),
-      // memberTransport = document.createElement("span"),
-      // memberRoom = document.createElement("span"),
-      // memberOther= document.createElement("span");
+       memberCat = document.createElement("span");
       orderList.appendChild(listTag);
-      listTag.classList.add("member");
-      memberFood.innerText = householdFoodPriceSum;
-      // memberEnt.innerText = householdEntPriceSum;
-      // memberTransport.innerText = householdTransportPriceSum;
-      // memberRoom.innerText = householdRoomPriceSum;
-      // memberOther.innerText = householdOtherPriceSum;
-      listTag.append(memberFood);
-      // listTag.append(memberEnt);
-      // listTag.append(memberTransport);
-      // listTag.append(memberRoom);
-      // listTag.append(memberOther);
+      listTag.appendChild(memberCat);
+      memberCat.classList.add("catExpenseSum");
+      memberCat.innerText = householdPriceSum;
     }
-  
   }
 }
 
@@ -447,25 +423,26 @@ class Household {
   //  create member method
   //  check local storage and add household to household select input
   addMemberOfHousehold() {
-    for(let i=0;i<householdArray.length;i++){
+    for (let i = 0; i < householdArray.length; i++) {
       let filterArray = exArray.filter((e) => {
-        return e.Household === householdArray[i];
-      }),
-      priceArray = filterArray.map((e) => e.Price),
-      householdPriceSum = priceArray.reduce(
-        (accumulator, current) => accumulator + Number(current),
-        0
-      ),
-      sumExpense ={
-        member: householdArray[i],
-        totalExpenseSum: householdPriceSum
-      },
-      householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
-      state ={
-        member: householdArray[i],
-        budgetState: householdState
-      };
-      
+          return e.Household === householdArray[i];
+        }),
+        priceArray = filterArray.map((e) => e.Price),
+        householdPriceSum = priceArray.reduce(
+          (accumulator, current) => accumulator + Number(current),
+          0
+        ),
+        sumExpense = {
+          member: householdArray[i],
+          totalExpenseSum: householdPriceSum,
+        },
+        householdState =
+          Number(memberBudgetArray[i].newAmount) - householdPriceSum,
+        state = {
+          member: householdArray[i],
+          budgetState: householdState,
+        };
+
       const tag = document.createElement("option");
       tag.value = householdArray[i];
       tag.innerText = householdArray[i];
@@ -473,9 +450,9 @@ class Household {
 
       const orderList = document.querySelector("#memberOfHousehold ol");
       const listTag = document.createElement("li"),
-      memberName = document.createElement("span"),
-      memberBudget = document.createElement("span"),
-      memberState = document.createElement("span");
+        memberName = document.createElement("span"),
+        memberBudget = document.createElement("span"),
+        memberState = document.createElement("span");
       orderList.appendChild(listTag);
       listTag.classList.add("member");
       memberState.classList.add("memberState");
@@ -488,13 +465,12 @@ class Household {
       listTag.append(memberBudget);
       listTag.append(memberState);
 
-      if(householdState > 0){
+      if (householdState > 0) {
         memberState.classList.add("green");
-      } else if(householdState < 0){
+      } else if (householdState < 0) {
         memberState.classList.add("red");
       }
     }
-      
   }
   //  household Of food category
   addMemberOfFoodCat() {
@@ -589,8 +565,7 @@ class Household {
           JSON.parse(localStorage.getItem("memberBudget"));
           new UserInterface().removeHouseholdSpan();
           new Household().addMemberOfHousehold(getHousehold);
-          
-       }
+        }
       }
     }
   }
@@ -628,7 +603,7 @@ class Budget {
       newWalletAmount.innerText = "";
       addToBudget.disabled = false;
       addToBudgetForm.style.display = "none";
-      location.reload()
+      location.reload();
     }
   }
 
@@ -690,28 +665,31 @@ class Budget {
 
   // household budget state
   householdBudgetState() {
-
     for (let i = 0; i < householdArray.length; i++) {
       let filterArray = exArray.filter((e) => {
-        return e.Household === householdArray[i];
-      }),
-      priceArray = filterArray.map((e) => e.Price),
-      householdPriceSum = priceArray.reduce(
-        (accumulator, current) => accumulator + Number(current),
-        0
-      ),
-      sumExpense ={
-        member: householdArray[i],
-        totalExpenseSum: householdPriceSum
-      },
-      householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
-      state ={
-        member: householdArray[i],
-        budgetState: householdState
-      };
-      householdTotalExpense.push(sumExpense)
+          return e.Household === householdArray[i];
+        }),
+        priceArray = filterArray.map((e) => e.Price),
+        householdPriceSum = priceArray.reduce(
+          (accumulator, current) => accumulator + Number(current),
+          0
+        ),
+        sumExpense = {
+          member: householdArray[i],
+          totalExpenseSum: householdPriceSum,
+        },
+        householdState =
+          Number(memberBudgetArray[i].newAmount) - householdPriceSum,
+        state = {
+          member: householdArray[i],
+          budgetState: householdState,
+        };
+      householdTotalExpense.push(sumExpense);
       memberStateArray.push(state);
-      localStorage.setItem("householdTotalExpense", JSON.stringify(householdTotalExpense));
+      localStorage.setItem(
+        "householdTotalExpense",
+        JSON.stringify(householdTotalExpense)
+      );
       localStorage.setItem("memberState", JSON.stringify(memberStateArray));
     }
   }
@@ -728,34 +706,34 @@ class Expense {
     };
     exArray.push(userData);
     localStorage.setItem("exArray", JSON.stringify(exArray));
-    new Expense().expenseAmount(price);    
+    new Expense().expenseAmount(price);
   }
   expenseAmount(price) {
     totalExpense = Number(totalExpense) + price;
     localStorage.setItem("totalExpense", totalExpense);
-    return totalExpense; 
+    return totalExpense;
   }
-  memberExpense(category,categoryArray) {
+  memberExpense(category, categoryArray) {
     for (let i = 0; i < householdArray.length; i++) {
       let filterArray = exArray.filter((e) => {
-        return e.Household === householdArray[i];
-      }),
-      householdCat= filterArray.filter((e) => {
-        return e.Category === category;
-      }),
-      householdCatPrice = householdCat.map((e) => e.Price),
-      householdPriceSum = householdCatPrice.reduce(
-        (accumulator, current) => accumulator + Number(current),
-        0
-      ),
-      sumExpense ={
-        member: householdArray[i],
-        categoryName: category,
-        totalExpenseSum: householdPriceSum
-      };
-     
+          return e.Household === householdArray[i];
+        }),
+        householdCat = filterArray.filter((e) => {
+          return e.Category === category;
+        }),
+        householdCatPrice = householdCat.map((e) => e.Price),
+        householdPriceSum = householdCatPrice.reduce(
+          (accumulator, current) => accumulator + Number(current),
+          0
+        ),
+        sumExpense = {
+          member: householdArray[i],
+          categoryName: category,
+          totalExpenseSum: householdPriceSum,
+        };
+
       categoryArray.push(sumExpense);
-      localStorage.setItem(category+"Array", JSON.stringify(categoryArray));
+      localStorage.setItem(category + "Array", JSON.stringify(categoryArray));
     }
   }
 
@@ -785,7 +763,7 @@ class Expense {
         newExpense,
         category
       );
-        }
+    }
   }
   enertainment() {
     if (
@@ -793,40 +771,40 @@ class Expense {
       !entertainmentCost.value ||
       getEntHousehold.value == "" ||
       entertainmentTitle.value == ""
-      ) {
-        let parent = document.querySelector("#entertainment"),
+    ) {
+      let parent = document.querySelector("#entertainment"),
         child = document.querySelector("#entertainment label");
-        new UserInterface().displayErrorMsg(
-          `لطفا مقادیر را به درستی وارد کنید.`,
-          parent,
-          child
-          );
-        } else {
-          const newExpense = Number(entertainmentCost.value);
-          const householdNewEx = getEntHousehold.value;
-          const householdNewExTitle = entertainmentTitle.value;
-          const category = entCat.id;
-          new Expense().addExpense(
-            householdNewEx,
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
+        parent,
+        child
+      );
+    } else {
+      const newExpense = Number(entertainmentCost.value);
+      const householdNewEx = getEntHousehold.value;
+      const householdNewExTitle = entertainmentTitle.value;
+      const category = entCat.id;
+      new Expense().addExpense(
+        householdNewEx,
         householdNewExTitle,
         newExpense,
         category
-        );
-      }
+      );
     }
-    transport() {
-      if (
-        typeof transportCost.value == "number" ||
-        !transportCost.value ||
-        getTransportHousehold.value == "" ||
-        transportTitle.value == ""
-        ) {
-          let parent = document.querySelector("#transport"),
-          child = document.querySelector("#transport label");
-          new UserInterface().displayErrorMsg(
-            `لطفا مقادیر را به درستی وارد کنید.`,
-            parent,
-            child
+  }
+  transport() {
+    if (
+      typeof transportCost.value == "number" ||
+      !transportCost.value ||
+      getTransportHousehold.value == "" ||
+      transportTitle.value == ""
+    ) {
+      let parent = document.querySelector("#transport"),
+        child = document.querySelector("#transport label");
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
+        parent,
+        child
       );
     } else {
       const newExpense = Number(transportCost.value);
@@ -838,26 +816,26 @@ class Expense {
         householdNewExTitle,
         newExpense,
         category
-        );
-      }
+      );
     }
-    room() {
-      if (
-        typeof roomCost.value == "number" ||
-        !roomCost.value ||
-        getRoomHousehold.value == "" ||
-        roomTitle.value == ""
-        ) {
-          let parent = document.querySelector("#room"),
-          child = document.querySelector("#room label");
-          new UserInterface().displayErrorMsg(
-            `لطفا مقادیر را به درستی وارد کنید.`,
+  }
+  room() {
+    if (
+      typeof roomCost.value == "number" ||
+      !roomCost.value ||
+      getRoomHousehold.value == "" ||
+      roomTitle.value == ""
+    ) {
+      let parent = document.querySelector("#room"),
+        child = document.querySelector("#room label");
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
         parent,
         child
-        );
-      } else {
-        const newExpense = Number(roomCost.value);
-        const householdNewEx = getRoomHousehold.value;
+      );
+    } else {
+      const newExpense = Number(roomCost.value);
+      const householdNewEx = getRoomHousehold.value;
       const householdNewExTitle = roomTitle.value;
       const category = roomCat.id;
       new Expense().addExpense(
@@ -865,34 +843,34 @@ class Expense {
         householdNewExTitle,
         newExpense,
         category
-        );
-      }
+      );
     }
-    other() {
-      if (
+  }
+  other() {
+    if (
       typeof otherCost.value == "number" ||
       !otherCost.value ||
       getOtherHousehold.value == "" ||
       otherTitle.value == ""
-      ) {
-        let parent = document.querySelector("#food"),
+    ) {
+      let parent = document.querySelector("#food"),
         child = document.querySelector("#food label");
-        new UserInterface().displayErrorMsg(
-          `لطفا مقادیر را به درستی وارد کنید.`,
-          parent,
-          child
-          );
-        } else {
-          const newExpense = Number(otherCost.value);
-          const householdNewEx = getOtherHousehold.value;
-          const householdNewExTitle = otherTitle.value;
-          const category = otherCat.id;
-          new Expense().addExpense(
-            householdNewEx,
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
+        parent,
+        child
+      );
+    } else {
+      const newExpense = Number(otherCost.value);
+      const householdNewEx = getOtherHousehold.value;
+      const householdNewExTitle = otherTitle.value;
+      const category = otherCat.id;
+      new Expense().addExpense(
+        householdNewEx,
         householdNewExTitle,
         newExpense,
         category
-        );
-      }
+      );
     }
+  }
 }
