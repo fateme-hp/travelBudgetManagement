@@ -214,7 +214,8 @@ delBtn.addEventListener("click", function () {
 });
 
 //  show household form
-createNewHousehold.addEventListener("click", function () {
+createNewHousehold.addEventListener("click", function (e) {
+  e.preventDefault();
   travelManagement.style.display = "none";
   createHousehold.style.display = "flex";
 });
@@ -237,9 +238,15 @@ condition.addEventListener("click", function () {
   new Household().condition(householdSelected);
 });
 
-condBtn.addEventListener("click", function(){
+condBtn.addEventListener("click", function(e){
+  e.preventDefault();
   let householdConditionSelected = household.options[household.selectedIndex].value;
   new UserInterface().householdCondition(householdConditionSelected);
+  // new UserInterface().householdCondition(householdEntExpense);
+  // new UserInterface().householdCondition(householdTransportExpense);
+  // new UserInterface().householdCondition(householdRoomExpense);
+  // new UserInterface().householdCondition(householdOtherExpense);
+  
   condition.style.display ="flex";
 })
 
@@ -311,29 +318,82 @@ class UserInterface {
     });
   }
 
-  householdCondition(conditionMember){
-    let userSelected = conditionMember;
-    for(let i=0;i<householdArray.length;i++){
-      console.log('object');
-      const orderList = document.querySelector("#memberOfHousehold ol");
+  householdCondition(household){
+    console.log(household);
+    if (
+      !household
+    ) {
+      new UserInterface().displayErrorMsg(
+        `لطفا مقادیر را به درستی وارد کنید.`,
+        addToBudgetForm,
+        budgetFormChild
+      );
+    } else {
+      console.log(householdFoodExpense);
+      let filterArray = householdFoodExpense.filter((e) => {
+        return e.member === household;
+      }),
+      householdFoodCat= filterArray.filter((e) => {
+        return e.Category === "foodCategory";
+      }),
+      householdFoodCatPrice = householdFoodCat.map((e) => e.totalExpenseSum),
+      householdFoodPriceSum = householdFoodCatPrice.reduce(
+        (accumulator, current) => accumulator + Number(current),
+        0
+      );
+      // householdEntCat= filterArray.filter((e) => {
+      //   return e.Category === "entCategory";
+      // }),
+      // householdEntCatPrice = householdEntCat.map((e) => e.totalExpenseSum),
+      // householdEntPriceSum = householdEntCatPrice.reduce(
+      //   (accumulator, current) => accumulator + Number(current),
+      //   0
+      // ),
+      // householdTransportCat= filterArray.filter((e) => {
+      //   return e.Category === "transportCategory";
+      // }),
+      // householdTransportCatPrice = householdTransportCat.map((e) => e.totalExpenseSum),
+      // householdTransportPriceSum = householdTransportCatPrice.reduce(
+      //   (accumulator, current) => accumulator + Number(current),
+      //   0
+      // ),
+      // householdRoomCat= filterArray.filter((e) => {
+      //   return e.Category === "roomCategory";
+      // }),
+      // householdRoomCatPrice = householdRoomCat.map((e) => e.totalExpenseSum),
+      // householdRoomPriceSum = householdRoomCatPrice.reduce(
+      //   (accumulator, current) => accumulator + Number(current),
+      //   0
+      // ),
+      // householdOtherCat= filterArray.filter((e) => {
+      //   return e.Category === "otherCategory";
+      // }),
+      // householdOtherCatPrice = householdOtherCat.map((e) => e.totalExpenseSum),
+      // householdOtherPriceSum = householdOtherCatPrice.reduce(
+      //   (accumulator, current) => accumulator + Number(current),
+      //   0
+      // );
+      const orderList = document.querySelector("#householdSum ol");
       const listTag = document.createElement("li"),
-      memberName = document.createElement("span"),
-      memberBudget = document.createElement("span"),
-      memberState = document.createElement("span");
+      memberFood = document.createElement("span");
+      // memberEnt = document.createElement("span"),
+      // memberTransport = document.createElement("span"),
+      // memberRoom = document.createElement("span"),
+      // memberOther= document.createElement("span");
       orderList.appendChild(listTag);
       listTag.classList.add("member");
-      memberState.classList.add("memberState");
-      memberBudget.classList.add("memberBudget");
-      memberName.classList.add("memberName");
-      memberName.innerText = householdArray[i];
-      memberBudget.innerText = memberBudgetArray[i].newAmount;
-      // memberState.innerText = householdState;
-      listTag.append(memberName);
-      listTag.append(memberBudget);
-      listTag.append(memberState);
+      memberFood.innerText = householdFoodPriceSum;
+      // memberEnt.innerText = householdEntPriceSum;
+      // memberTransport.innerText = householdTransportPriceSum;
+      // memberRoom.innerText = householdRoomPriceSum;
+      // memberOther.innerText = householdOtherPriceSum;
+      listTag.append(memberFood);
+      // listTag.append(memberEnt);
+      // listTag.append(memberTransport);
+      // listTag.append(memberRoom);
+      // listTag.append(memberOther);
     }
-
-    console.log(userSelected);
+  
   }
 }
 
@@ -387,26 +447,25 @@ class Household {
   //  create member method
   //  check local storage and add household to household select input
   addMemberOfHousehold() {
-   
-    for (let i = 0; i < householdArray.length; i++) {
+    for(let i=0;i<householdArray.length;i++){
       let filterArray = exArray.filter((e) => {
-          return e.Household === householdArray[i];
-        }),
-        priceArray = filterArray.map((e) => e.Price),
-        householdPriceSum = priceArray.reduce(
-          (accumulator, current) => accumulator + Number(current),
-          0
-        ),
-        sumExpense ={
-          member: householdArray[i],
-          totalExpenseSum: householdPriceSum
-        },
-        householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
-        state ={
-          member: householdArray[i],
-          budgetState: householdState
-        };
-
+        return e.Household === householdArray[i];
+      }),
+      priceArray = filterArray.map((e) => e.Price),
+      householdPriceSum = priceArray.reduce(
+        (accumulator, current) => accumulator + Number(current),
+        0
+      ),
+      sumExpense ={
+        member: householdArray[i],
+        totalExpenseSum: householdPriceSum
+      },
+      householdState = Number(memberBudgetArray[i].newAmount) - householdPriceSum,
+      state ={
+        member: householdArray[i],
+        budgetState: householdState
+      };
+      
       const tag = document.createElement("option");
       tag.value = householdArray[i];
       tag.innerText = householdArray[i];
@@ -435,6 +494,7 @@ class Household {
         memberState.classList.add("red");
       }
     }
+      
   }
   //  household Of food category
   addMemberOfFoodCat() {
@@ -695,7 +755,7 @@ class Expense {
       };
      
       categoryArray.push(sumExpense);
-      localStorage.setItem(category, JSON.stringify(categoryArray));
+      localStorage.setItem(category+"Array", JSON.stringify(categoryArray));
     }
   }
 

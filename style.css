@@ -233,6 +233,7 @@ margin-top:10px;
 #conditionDisplay ,#createHousehold {
   margin: 3% ;
   padding: 20px;
+  width: 944px;
   display: none;
   flex-direction: column;
   align-items: flex-start;
@@ -251,7 +252,12 @@ margin-top:10px;
 .category *, #createHousehold * {
   margin-bottom: 10px;
 }
-
+.categoryBtn{
+  background-color: rgb(241, 241, 241);
+  color: #000;
+  border: 2px solid #000;
+  font-size: 16px;
+}
 #stateOfHouseholds{
   display: flex;
   padding: 25px;
