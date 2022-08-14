@@ -244,6 +244,7 @@ condBtn.addEventListener("click", function (e) {
   e.preventDefault();
   let householdConditionSelected =
     household.options[household.selectedIndex].value;
+    new Household().householdReport(householdConditionSelected);
   new UserInterface().householdCondition(
     householdConditionSelected,
     "foodCategory",
@@ -343,7 +344,7 @@ class UserInterface {
 
   householdCondition(household, catName, catExpense) {
     console.log(household);
-    if (household === "") {
+    if (getHousehold.value ==="") {
       new UserInterface().displayErrorMsg(
         `لطفا مقادیر را به درستی وارد کنید.`,
         addToBudgetForm,
@@ -362,7 +363,7 @@ class UserInterface {
           0
         );
 
-      const orderList = document.querySelector("#householdSum ol");
+      const orderList = document.querySelector("#catExpenseSum");
       const listTag = document.createElement("li"),
        memberCat = document.createElement("span");
       orderList.appendChild(listTag);
@@ -568,6 +569,34 @@ class Household {
         }
       }
     }
+  }
+   
+  householdReport(household){
+    let filterArray = exArray.filter((e) => {
+      return e.Household === household;
+    }),
+     memberBudgetAmount = memberBudgetArray.filter((e) => {
+      return e.memberName === household;
+    }),
+    budgetSum = memberBudgetAmount.map((e) => e.newAmount),
+    priceArray = filterArray.map((e) => e.Price),
+    householdPriceSum = priceArray.reduce(
+      (accumulator, current) => accumulator + Number(current),
+      0
+    ),
+    householdState = Number(budgetSum[0]) - householdPriceSum;
+
+    document.querySelector('#name').append( household);
+    document.querySelector('#reportBudget').append(budgetSum[0]);
+    document.querySelector('#reportExpense').append(householdPriceSum);
+    document.querySelector('#reportState').append(householdState);
+
+    if (householdState > 0) {
+      document.querySelector('#reportState').classList.add("green");
+    } else if (householdState < 0) {
+      document.querySelector('#reportState').classList.add("red");
+    }
+
   }
 
   // household Condition
